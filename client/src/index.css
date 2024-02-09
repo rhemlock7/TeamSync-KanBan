@@ -76,3 +76,27 @@ p {
 .grid-outlet {
     grid-area: 1 / 2 / 2 / 9;
 }
+
+/* Styles by class */
+.button-cta {
+    background-color: var(--orange);
+    padding: 4px 15px;
+    border-radius: 4px;
+    transition: all 200ms ease;
+}
+
+.button-cta:hover {
+    transform: scale(1.025);
+}
+
+.new-list-bttn {
+    background-color: var(--black);
+    color: var(--white);
+    padding: 8px 50px;
+    border-radius: 6px;
+    transition: all 200ms ease;
+}
+
+.new-list-bttn:hover {
+    transform: scale(1.025);
+}
