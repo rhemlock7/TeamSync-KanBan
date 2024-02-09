@@ -2,6 +2,10 @@ const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
 const projectSchema = new Schema({
+    _id: {
+        type: Schema.Types.ObjectId,
+        require: true
+    },
     title: {
         type: String,
         required: true,
@@ -19,6 +23,12 @@ const projectSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'User',
         },
+    ],
+    lists: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'List',
+        }
     ]
 });
 

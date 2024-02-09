@@ -11,6 +11,7 @@ const typeDefs = `
     _id: ID
     title: String
     createdAt: String
+    users: [User]!
     lists: [List]!
   }
   
@@ -47,11 +48,15 @@ const typeDefs = `
     user(username: String!): User
     me: User
     projects: [Project]
+    project(username: String!): Project
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
+    addProject(title: String!, projectAuthor: String!, authId: ID!): Project
+    addList(title: String!, projectId: ID!): List
+    addCard(title: String!, listId: ID!, description: String!): Card
   }
 `;
 

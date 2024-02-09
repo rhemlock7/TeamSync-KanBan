@@ -17,8 +17,11 @@ const resolvers = {
       throw AuthenticationError;
     },
     projects: async () => {
-      return Project.find();
-    }
+      return Project.find().populate('lists').populate('users');
+    },
+    project: async (parent, { projectname }) => {
+      return Project.findOne({ projectname }).populate('lists');
+    },
   },
 
   Mutation: {
@@ -43,6 +46,33 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
+    },
+    addProject: async (parent, { title, projectAuthor, authId }) => {
+      const project = await Project.create({ title, users: [authId] });
+      await User.findOneAndUpdate(
+        { username: projectAuthor },
+        { $addToSet: { projects: project._id } }
+      );
+
+      return project;
+    },
+
+    addList: async (parent, { title, projectId }) => {
+      const list = await List.create({
+        title, projectId: projectId
+      });
+      await Project.findOneAndUpdate({ _id: projectId }, { $addToSet: { lists: list._id } })
+
+      return list;
+
+    },
+
+    addCard: async (parent, { title, listId, description }) => {
+      const card = await Card.create({
+        title, listId, description
+      });
+      await List.findOneAndUpdate({ _id: listId }, { $addToSet: { cards: card._id } });
+      return card
     }
   },
 };
