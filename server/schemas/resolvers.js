@@ -1,4 +1,5 @@
-const { User } = require('../models');
+const { User, Project, List, Card } = require('../models');
+
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
@@ -7,7 +8,7 @@ const resolvers = {
       return User.find();
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username });
+      return User.findOne({ username }).populate('projects');
     },
     me: async (parent, args, context) => {
       if (context.user) {
@@ -15,6 +16,9 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
+    projects: async () => {
+      return Project.find();
+    }
   },
 
   Mutation: {

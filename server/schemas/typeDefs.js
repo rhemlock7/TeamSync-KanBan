@@ -4,10 +4,20 @@ const typeDefs = `
     username: String
     email: String
     password: String
+    projects: [Project]!
   }
 
+  type Project {
+    _id: ID
+    title: String
+    createdAt: String
+  }
   
-  
+  type List {
+    _id: ID
+    title: String
+    projectId: ID
+  }
 
   type Auth {
     token: ID!
@@ -18,6 +28,7 @@ const typeDefs = `
     users: [User]
     user(username: String!): User
     me: User
+    projects: [Project]
   }
 
   type Mutation {

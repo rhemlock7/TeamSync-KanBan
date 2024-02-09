@@ -14,7 +14,10 @@ const cardSchema = new Schema({
         required: true
     },
     description: {
-        type: Text,
+        type: String,
+        minlength: 1,
+        maxlength: 300,
+        trim: true,
 
     },
     createdAt: {

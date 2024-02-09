@@ -9,7 +9,7 @@ const listSchema = new Schema({
         maxlength: 30,
         trim: true,
     },
-    prjectId: {
+    projectId: {
         type: Schema.Types.ObjectId,
         required: true
     },
