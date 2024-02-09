@@ -1,8 +1,10 @@
+import ProjectContainer from "../components/ProjectContainer"
 
 function Home() {
     return (
-        <div>
-            <h1>Home Page</h1>
+        <div className="light-bg px-5">
+            <h1 className="">Project Title</h1>
+            <ProjectContainer />
         </div>
     )
 }
