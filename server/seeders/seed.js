@@ -1,12 +1,12 @@
 const db = require('../config/connection');
-const { User, Thought } = require('../models');
+const { User, Project, List, Card } = require('../models');
 const userSeeds = require('./userSeeds.json');
 const thoughtSeeds = require('./thoughtSeeds.json');
 const cleanDB = require('./cleanDB');
 
 db.once('open', async () => {
   try {
-    await cleanDB('Thought', 'thoughts');
+    await cleanDB('Project', 'projects');
     await cleanDB('User', 'users');
 
     await User.create(userSeeds);
