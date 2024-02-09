@@ -11,12 +11,30 @@ const typeDefs = `
     _id: ID
     title: String
     createdAt: String
+    lists: [List]!
   }
   
   type List {
     _id: ID
     title: String
     projectId: ID
+    cards: [Card]!
+  }
+
+  type Card {
+    _id: ID
+    title: String 
+    listId: ID
+    description: String
+    createdAt: String
+    comments: [Comment]!
+  }
+
+  type Comment {
+    _id: ID
+    commentText: String
+    commentAuthor: String
+    createdAt: String
   }
 
   type Auth {
