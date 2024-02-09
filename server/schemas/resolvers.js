@@ -1,4 +1,5 @@
-const { User, Thought } = require('../models');
+const { User, Project, List, Card } = require('../models');
+
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
@@ -7,13 +8,19 @@ const resolvers = {
       return User.find();
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username });
+      return User.findOne({ username }).populate('projects');
     },
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id });
       }
       throw AuthenticationError;
+    },
+    projects: async () => {
+      return Project.find().populate('lists').populate('users');
+    },
+    project: async (parent, { projectname }) => {
+      return Project.findOne({ projectname }).populate('lists');
     },
   },
 
@@ -39,6 +46,33 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
+    },
+    addProject: async (parent, { title, projectAuthor, authId }) => {
+      const project = await Project.create({ title, users: [authId] });
+      await User.findOneAndUpdate(
+        { username: projectAuthor },
+        { $addToSet: { projects: project._id } }
+      );
+
+      return project;
+    },
+
+    addList: async (parent, { title, projectId }) => {
+      const list = await List.create({
+        title, projectId: projectId
+      });
+      await Project.findOneAndUpdate({ _id: projectId }, { $addToSet: { lists: list._id } })
+
+      return list;
+
+    },
+
+    addCard: async (parent, { title, listId, description }) => {
+      const card = await Card.create({
+        title, listId, description
+      });
+      await List.findOneAndUpdate({ _id: listId }, { $addToSet: { cards: card._id } });
+      return card
     }
   },
 };
