@@ -3,11 +3,12 @@
 @tailwind utilities;
 
 :root {
-    --orange: #EB5E28;
-    --black: #252422;
-    --darkGray: #403D39;
-    --lightGray: #CCC5B9;
-    --white: #FFFCF2;
+    --accent: #00A8E8;
+    --black: #000f13;
+    --darkGray: #02233b;
+    --lightGray: #007EA7;
+    --offWhite: #ededed;
+    --white: #FFFFFF;
 }
 
 * {
@@ -56,8 +57,17 @@ p {
     background-color: var(--lightGray);
 }
 
+.offWhite-bg {
+    background-color: var(--offWhite);
+}
+
 .white-bg {
     background-color: var(--white);
+}
+
+.gradient-bg {
+    background: rgb(185, 185, 185);
+    background: linear-gradient(338deg, rgba(185, 185, 185, 1) 0%, rgba(230, 230, 230, 1) 43%, rgba(238, 238, 238, 1) 100%);
 }
 
 /* Main Grid */
@@ -79,7 +89,7 @@ p {
 
 /* Styles by class */
 .button-cta {
-    background-color: var(--orange);
+    background-color: var(--accent);
     padding: 4px 15px;
     border-radius: 4px;
     transition: all 200ms ease;
