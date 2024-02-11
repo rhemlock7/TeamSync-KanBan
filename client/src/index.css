@@ -44,6 +44,20 @@ p {
     font-style: normal;
 }
 
+button {
+    border: 1px solid var(--black);
+    border-radius: 4px;
+    padding: 3px 30px;
+    margin-top: 5px;
+    transition: all 200ms ease;
+}
+
+button:hover {
+    color: var(--white);
+    background-color: var(--black);
+    transform: scale(1.025);
+}
+
 /* Background Color Classes */
 .black-bg {
     background-color: var(--black);

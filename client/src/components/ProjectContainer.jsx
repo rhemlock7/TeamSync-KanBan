@@ -9,6 +9,7 @@ function ProjectContainer() {
             <div className="grid grid-flow-col auto-cols-max gap-x-3">
                 <List />
                 <List />
+                <List />
                 <div>
                     <button className='new-list-bttn'>Create a new list...</button>
                 </div>
