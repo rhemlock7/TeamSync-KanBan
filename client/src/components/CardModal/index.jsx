@@ -1,4 +1,6 @@
+import CardDescription from './CardDescription';
 import './CardModal.css';
+import CommentSection from './CommentSection';
 import MembersDate from './MembersDate';
 import ToDoList from './ToDoList';
 
@@ -19,19 +21,13 @@ function CardModal() {
                 <MembersDate />
 
                 {/* Description */}
-                <section className='my-4'>
-                    <h3>Description</h3>
-                    <p>Add Markdown Input textarea when ready</p>
-                </section>
+                <CardDescription />
 
                 {/* ToDo List */}
                 <ToDoList />
 
                 {/* Comment Sections */}
-                <section className='my-4'>
-                    <h3>Comments</h3>
-                    <p>Add comment section when ready</p>
-                </section>
+                <CommentSection />
             </div>
         </div>
     )
