@@ -39,60 +39,105 @@ const Signup = () => {
   };
 
   return (
-    <main className="flex-row justify-center mb-4">
-      <div className="col-12 col-lg-10">
-        <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
-          <div className="card-body">
-            {data ? (
-              <p>
-                <Link to="/">back to the homepage.</Link>
-              </p>
-            ) : (
-              <form onSubmit={handleFormSubmit}>
-                <input
-                  className="form-input"
-                  placeholder="Your username"
-                  name="username"
-                  type="text"
-                  value={formState.name}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="Your email"
-                  name="email"
-                  type="email"
-                  value={formState.email}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="******"
-                  name="password"
-                  type="password"
-                  value={formState.password}
-                  onChange={handleChange}
-                />
-                <button
-                  className="btn btn-block btn-primary"
-                  style={{ cursor: 'pointer' }}
-                  type="submit"
-                >
-                  Submit
-                </button>
-              </form>
-            )}
-
-            {error && (
-              <div className="my-3 p-3 bg-danger text-white">
-                {error.message}
-              </div>
-            )}
-          </div>
-        </div>
+    <section className="h-full flex flex-col items-center justify-center">
+      <div className="text-center mb-10 text-3xl">
+        <img
+          className="mx-auto w-48"
+          src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+          alt="logo"
+        />
+        <h4 className="mt-4 text-xl font-semibold">We are Project 3 Team</h4>
       </div>
-    </main>
+
+      <div className="bg-gray-100 rounded-md p-8 max-w-md w-full lg:w-2/3 text-gray-700">
+        <h2 className="text-center text-lg font-semibold mb-6">Sign Up</h2>
+
+        {data ? (
+          <p className="text-center text-gray-600">
+            Success! You may now head{' '}
+            <Link to="/">back to the homepage.</Link>
+          </p>
+        ) : (
+          <form onSubmit={handleFormSubmit} className="space-y-4">
+            <div>
+              <label htmlFor="username" className="block text-lg font-medium">Username</label>
+              <input
+                id="username"
+                value={formState.username}
+                onChange={handleChange}
+                name="username"
+                type="text"
+                autoComplete="username"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-lg"
+                required
+              />
+            </div>
+
+            <div>
+              <label htmlFor="email" className="block text-lg font-medium">Email address</label>
+              <input
+                id="email"
+                value={formState.email}
+                onChange={handleChange}
+                name="email"
+                type="email"
+                autoComplete="email"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-lg"
+                required
+              />
+            </div>
+
+            <div>
+              <label htmlFor="password" className="block text-lg font-medium">Password</label>
+              <input
+                id="password"
+                value={formState.password}
+                onChange={handleChange}
+                name="password"
+                type="password"
+                autoComplete="new-password"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-lg"
+                required
+              />
+            </div>
+
+            <div>
+              <label htmlFor="confirmPassword" className="block text-lg font-medium">Confirm Password</label>
+              <input
+                id="confirmPassword"
+                value={formState.confirmPassword}
+                onChange={handleChange}
+                name="confirmPassword"
+                type="password"
+                autoComplete="new-password"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-lg"
+                required
+              />
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                className="w-full inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-lg font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              >
+                Sign up
+              </button>
+            </div>
+          </form>
+        )}
+
+        {error && (
+          <div className="my-3 p-3 bg-red-100 text-red-700">
+            {error.message}
+          </div>
+        )}
+
+        {/* Login Section */}
+        <p className="mt-4 text-center text-lg text-gray-500">
+          Already a member? <Link to="/login" className="font-semibold leading-6 text-gray-600 hover:text-gray-500">Log in</Link>
+        </p>
+      </div>
+    </section>
   );
 };
 
