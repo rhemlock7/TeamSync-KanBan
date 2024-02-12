@@ -1,18 +1,23 @@
 import Draggable from 'react-draggable';
 
-function CardPreview({setCardModal}) {
+function CardPreview({cards, setCardModal}) {
 
     // handle whats clicked to setCardmodal to home cardModal state
 
+    const listOfCards = cards.cards
+
     return (
-        <Draggable>
-            <div className="white-bg text-black my-3 p-3 rounded-md">
-                <p className="text-lg">Card Title</p>
-                <p className="text-sm">Card Description Preview</p>
-                {/* <p cursor='pointer'  className='underline'>View</p> */}
-                <button className='p-0 border-none underline hover:bg-transparent hover:scale-100 hover:text-black' onClick={setCardModal}>View</button>
-            </div>
-        </Draggable>
+        <>
+        {listOfCards.map((card) => (
+            <Draggable key={card._id}>
+                <div className="white-bg text-black my-3 p-3 rounded-md">
+                    <p className="text-lg">{card.title}</p>
+                    <p className="text-sm">{card.description.substring(0, 60) + '...'}</p>
+                    <button className='p-0 border-none underline hover:bg-transparent hover:scale-100 hover:text-black' onClick={() => setCardModal(card._id)}>View</button>
+                </div>
+            </Draggable>
+        ))}
+        </>
     )
 }
 
