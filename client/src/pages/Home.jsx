@@ -1,4 +1,4 @@
-// import { useState } from "react";
+import { useState } from "react";
 // import { useQuery } from '@apollo/client';
 import ProjectContainer from "../components/ProjectContainer";
 import CardModal from "../components/CardModal";
@@ -8,24 +8,23 @@ import CardModal from "../components/CardModal";
 // const { data } = useQuery(QUERY_PROJECTS);
 // const projects = data?.projects || [];
 
-// console.log(projects)
-
 function Home() {
-    // const [modalOpen, setModalOpen] = useState(false)
+    const [modalOpen, setModalOpen] = useState(false)
+    const [cardModal, setCardModal] = useState("")
+
+
+
 
     return (
         <div className="gradient-bg px-5 h-screen">
-            {/* {loading ? (
-                <div>Loading...</div>
-            ) : (
-                <ProjectContainer />
-            )} */}
-            <ProjectContainer />
 
-            {/* {modalOpen && (
-                <CardModal />
-            )} */}
-            <CardModal />
+            <ProjectContainer 
+                setCardModal={setCardModal}
+                setModalOpen={setModalOpen}
+            />
+
+            {modalOpen && (cardModal !== "") ?  <CardModal /> : <></>}
+            {/* <CardModal />  */}
 
         </div>
     )

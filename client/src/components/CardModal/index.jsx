@@ -4,7 +4,8 @@ import CommentSection from './CommentSection';
 import MembersDate from './MembersDate';
 import ToDoList from './ToDoList';
 
-function CardModal() {
+function CardModal(props) {
+    console.log(props);
     return (
         <div className="modal-container pb-12">
             <div className='modal'>

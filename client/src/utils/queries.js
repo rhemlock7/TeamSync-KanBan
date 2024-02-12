@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
-export const QUERY_USER = gql`
+// export const QUERY_USER = gql`
   
-`;
+// `;
 
 export const QUERY_PROJECTS = gql`
   query QUERY_PROJECTS {
@@ -47,10 +47,10 @@ export const QUERY_SINGLE_PROJECT = gql`
 
 
 
-export const QUERY_LISTS = gql`
+// export const QUERY_LISTS = gql`
   
-`;
+// `;
 
-export const QUERY_CARDS = gql`
+// export const QUERY_CARDS = gql`
   
-`;
+// `;
