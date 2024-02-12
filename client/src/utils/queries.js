@@ -1,8 +1,5 @@
 import { gql } from '@apollo/client';
 
-// export const QUERY_USER = gql`
-  
-// `;
 
 export const QUERY_PROJECTS = gql`
   query QUERY_PROJECTS {
@@ -24,26 +21,7 @@ export const QUERY_PROJECTS = gql`
 }
 `;
 
-export const QUERY_SINGLE_PROJECT = gql`
-  query QUERY_SINGLE_PROJECT($username: String!) {
-  project(username: $username) {
-    _id
-    title
-    lists {
-      _id
-      projectId
-      title
-      cards {
-        _id
-        description
-        listId
-        title
-        createdAt
-      }
-    }
-  }
-}
-`;
+
 
 export const QUERY_ONE_PROJECT = gql`
 query getProjectByID($projectId: ID!) {
@@ -76,13 +54,27 @@ query getProjectByID($projectId: ID!) {
     }
   }
 }
-`
+`;
 
-
-// export const QUERY_LISTS = gql`
-  
-// `;
-
-// export const QUERY_CARDS = gql`
-  
-// `;
+export const GET_SINGLE_CARD = gql`
+query GetCard($cardId: ID!) {
+  card(cardId: $cardId) {
+    _id
+    title
+    listId
+    description
+    createdAt
+    comments {
+      _id
+      commentText
+      commentAuthor
+      createdAt
+    }
+    toDoes {
+      _id
+      text
+      isCompleted
+    }
+  }
+}
+`;

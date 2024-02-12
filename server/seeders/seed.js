@@ -47,10 +47,10 @@ db.once('open', async () => {
 
     for (let i = 0; i < listArr.length; i++) {
       const cardOne = await Card.create({
-        title: cardSeeds[i].title, description: cardSeeds[i].description, comments: cardSeeds[i].comments, listId: listArr[i]._id
+        title: cardSeeds[i].title, description: cardSeeds[i].description, comments: cardSeeds[i].comments, listId: listArr[i]._id, toDoes: cardSeeds[i].toDoes
       });
       const cardTwo = await Card.create({
-        title: cardSeeds[(listArr.length - 1 - i)].title, description: cardSeeds[(listArr.length - 1 - i)].description, comments: cardSeeds[(listArr.length - 1 - i)].comments, listId: listArr[i]._id
+        title: cardSeeds[(listArr.length - 1 - i)].title, description: cardSeeds[(listArr.length - 1 - i)].description, comments: cardSeeds[(listArr.length - 1 - i)].comments, listId: listArr[i]._id, toDoes: cardSeeds[(listArr.length - 1 - i)].toDoes
       });
       await List.findOneAndUpdate(
         { _id: listArr[i]._id },
