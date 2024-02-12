@@ -5,7 +5,7 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find();
+      return User.find().populate('projects');
     },
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate('projects');
@@ -21,23 +21,22 @@ const resolvers = {
         path: 'lists',
         populate: {
           path: "cards",
-          populate: { path: "comments" }
+          populate: [{ path: "comments" }, { path: "toDoes" }]
         }
       }).populate('users');
-      console.log(projects);
       return projects
-    },
-    project: async (parent, { projectname }) => {
-      return Project.findOne({ projectname }).populate('lists');
     },
     projectId: async (parent, { projectId }) => {
       return Project.findOne({ _id: projectId }).populate({
         path: 'lists',
         populate: {
           path: "cards",
-          populate: { path: "comments" }
+          populate: [{ path: "comments" }, { path: "toDoes" }]
         }
       }).populate('users');
+    },
+    card: async (parent, { cardId }) => {
+      return Card.findOne({ _id: cardId }).populate('comments').populate('toDoes')
     }
   },
 
@@ -65,12 +64,11 @@ const resolvers = {
       return { token, user };
     },
     addProject: async (parent, { title, projectAuthor, authId }) => {
-      const project = await Project.create({ title, users: [authId] });
+      const project = await Project.create({ title, createdBy: projectAuthor, users: [authId] });
       await User.findOneAndUpdate(
-        { username: projectAuthor },
+        { _id: authId },
         { $addToSet: { projects: project._id } }
       );
-
       return project;
     },
 
@@ -84,12 +82,97 @@ const resolvers = {
 
     },
 
-    addCard: async (parent, { title, listId, description }) => {
+    addCard: async (parent, { title, listId, description, comments, toDoes }) => {
       const card = await Card.create({
-        title, listId, description
+        title, listId, description,
       });
       await List.findOneAndUpdate({ _id: listId }, { $addToSet: { cards: card._id } });
       return card
+    },
+
+    addComment: async (parent, { cardId, commentText, commentAuthor }) => {
+      return Card.findOneAndUpdate(
+        { _id: cardId },
+        {
+          $addToSet: { comments: { commentText, commentAuthor } },
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+    },
+    removeComment: async (parent, { cardId, commentId }) => {
+      return Card.findOneAndUpdate(
+        { _id: cardId },
+        { $pull: { comments: { _id: commentId } } },
+        { new: true }
+      );
+    },
+    addToDo: async (parent, { cardId, text }) => {
+      return Card.findOneAndUpdate(
+        { _id: cardId },
+        {
+          $addToSet: { toDoes: { text } },
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+    },
+    removeToDo: async (parent, { cardId, toDoId }) => {
+      return Card.findOneAndUpdate(
+        { _id: cardId },
+        { $pull: { toDoes: { _id: toDoId } } },
+        { new: true }
+      );
+    },
+    removeCard: async (parent, { cardId, listId }) => {
+      let card = await Card.findOneAndDelete({ _id: cardId });
+      await List.findOneAndUpdate({ _id: listId }, { $pull: { cards: card._id } });
+      return card;
+    },
+    removeList: async (parent, { listId, projectId }) => {
+      let list = await List.findOneAndDelete({ _id: listId });
+      await Project.findOneAndUpdate({ _id: projectId }, { $pull: { lists: list._id } });
+      return list;
+    },
+    updateToDo: async (parent, { toDoId, cardId, text, isCompleted }) => {
+      let card = await Card.findOneAndUpdate({ "_id": cardId, "toDoes._id": toDoId }, {
+        $set: {
+          "toDoes.$": { text: text, isCompleted: isCompleted }
+        }
+      },
+        { new: true })
+      return card;
+    },
+    updateCard: async (parent, { cardId, description, title }) => {
+      return Card.findOneAndUpdate({
+        _id: cardId
+      }, { description, title }, { new: true })
+    },
+    updateList: async (parent, { listId, title }) => {
+      return List.findOneAndUpdate({
+        _id: listId
+      }, { title }, { new: true })
+    },
+    updateProject: async (parent, { projectId, title }) => {
+      return Project.findOneAndUpdate({
+        _id: projectId
+      }, { title }, { new: true })
+    },
+    addUserProject: async (parent, { projectId, userId }) => {
+      return Project.findOneAndUpdate({
+        _id: projectId
+      }, { $addToSet: { users: userId } }, { new: true })
+    },
+    removeProject: async (parent, { projectId, userId }) => {
+      let project = Project.findOneAndDelete({
+        _id: projectId
+      });
+      await User.findOneAndUpdate({ _id: userId }, { $pull: { projects: project._id } });
+      return project;
     }
   },
 };
