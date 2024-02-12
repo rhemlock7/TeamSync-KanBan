@@ -26,6 +26,19 @@ const cardSchema = new Schema({
         default: Date.now,
         get: (timestamp) => dateFormat(timestamp),
     },
+    toDoes: [
+        {
+            text: {
+                type: String,
+                required: true
+            },
+            isCompleted: {
+                type: Boolean,
+                require: true,
+                default: false
+            }
+        }
+    ],
     comments: [
         {
             commentText: {

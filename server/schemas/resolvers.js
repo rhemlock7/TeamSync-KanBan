@@ -21,21 +21,17 @@ const resolvers = {
         path: 'lists',
         populate: {
           path: "cards",
-          populate: { path: "comments" }
+          populate: [{ path: "comments" }, { path: "toDoes" }]
         }
       }).populate('users');
-      console.log(projects);
       return projects
-    },
-    project: async (parent, { projectname }) => {
-      return Project.findOne({ projectname }).populate('lists');
     },
     projectId: async (parent, { projectId }) => {
       return Project.findOne({ _id: projectId }).populate({
         path: 'lists',
         populate: {
           path: "cards",
-          populate: { path: "comments" }
+          populate: [{ path: "comments" }, { path: "toDoes" }]
         }
       }).populate('users');
     }
@@ -84,13 +80,62 @@ const resolvers = {
 
     },
 
-    addCard: async (parent, { title, listId, description }) => {
+    addCard: async (parent, { title, listId, description, comments, toDoes }) => {
       const card = await Card.create({
-        title, listId, description
+        title, listId, description,
       });
       await List.findOneAndUpdate({ _id: listId }, { $addToSet: { cards: card._id } });
       return card
-    }
+    },
+
+    addComment: async (parent, { cardId, commentText, commentAuthor }) => {
+      return Card.findOneAndUpdate(
+        { _id: cardId },
+        {
+          $addToSet: { comments: { commentText, commentAuthor } },
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+    },
+    removeComment: async (parent, { cardId, commentId }) => {
+      return Card.findOneAndUpdate(
+        { _id: cardId },
+        { $pull: { comments: { _id: commentId } } },
+        { new: true }
+      );
+    },
+    addToDo: async (parent, { cardId, text }) => {
+      return Card.findOneAndUpdate(
+        { _id: cardId },
+        {
+          $addToSet: { toDoes: { text } },
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+    },
+    removeToDo: async (parent, { cardId, toDoId }) => {
+      return Card.findOneAndUpdate(
+        { _id: cardId },
+        { $pull: { toDoes: { _id: toDoId } } },
+        { new: true }
+      );
+    },
+    removeCard: async (parent, { cardId, listId }) => {
+      let card = await Card.findOneAndDelete({ _id: cardId });
+      await List.findOneAndUpdate({ _id: listId }, { $pull: { cards: card._id } });
+      return card;
+    },
+    removeList: async (parent, { listId, projectId }) => {
+      let list = await List.findOneAndDelete({ _id: listId });
+      await Project.findOneAndUpdate({ _id: projectId }, { $pull: { lists: list._id } });
+      return list;
+    },
   },
 };
 

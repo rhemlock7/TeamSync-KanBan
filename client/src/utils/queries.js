@@ -1,8 +1,28 @@
 import { gql } from '@apollo/client';
 
-// export const QUERY_USER = gql`
-  
-// `;
+export const LOGIN_USER = gql`
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+      user {
+        _id
+        username
+      }
+    }
+  }
+`;
+
+export const ADD_USER = gql`
+  mutation addUser($username: String!, $email: String!, $password: String!) {
+    addUser(username: $username, email: $email, password: $password) {
+      token
+      user {
+        _id
+        username
+      }
+    }
+  }
+`;
 
 export const QUERY_PROJECTS = gql`
   query QUERY_PROJECTS {
@@ -24,26 +44,7 @@ export const QUERY_PROJECTS = gql`
 }
 `;
 
-export const QUERY_SINGLE_PROJECT = gql`
-  query QUERY_SINGLE_PROJECT($username: String!) {
-  project(username: $username) {
-    _id
-    title
-    lists {
-      _id
-      projectId
-      title
-      cards {
-        _id
-        description
-        listId
-        title
-        createdAt
-      }
-    }
-  }
-}
-`;
+
 
 export const QUERY_ONE_PROJECT = gql`
 query getProjectByID($projectId: ID!) {
@@ -76,13 +77,4 @@ query getProjectByID($projectId: ID!) {
     }
   }
 }
-`
-
-
-// export const QUERY_LISTS = gql`
-  
-// `;
-
-// export const QUERY_CARDS = gql`
-  
-// `;
+`;

@@ -12,7 +12,7 @@ import {QUERY_ONE_PROJECT} from "../utils/queries";
 
 function Home() {
   // const [modalOpen, setModalOpen] = useState(false)
-  const {data} = useQuery(QUERY_ONE_PROJECT, {
+  const {loading, data} = useQuery(QUERY_ONE_PROJECT, {
     variables: {projectId: "65ca3d0fe0a69bbcb868de5c"},
   });
   console.log(data);
