@@ -1,36 +1,37 @@
-// import { useState } from "react";
-import {useQuery} from "@apollo/client";
+import { useState } from "react";
+import { useQuery } from "@apollo/client";
 import ProjectContainer from "../components/ProjectContainer";
-// import CardModal from "../components/CardModal";
+import CardModal from "../components/CardModal";
 
-import {QUERY_ONE_PROJECT} from "../utils/queries";
+import { QUERY_ONE_PROJECT, GET_SINGLE_CARD } from "../utils/queries";
 
-// const projects = data?.projects || [];
-// const {data} = useQuery(QUERY_SINGLE_PROJECT);
 
-// console.log(projects)
 
 function Home() {
-  // const [modalOpen, setModalOpen] = useState(false)
-  const {loading, data} = useQuery(QUERY_ONE_PROJECT, {
-    variables: {projectId: "65ca3d0fe0a69bbcb868de5c"},
-  });
-  console.log(data);
-  return (
-    <div className="gradient-bg px-5 h-screen">
-      {/* {loading ? (
-                <div>Loading...</div>
-            ) : (
-                <ProjectContainer />
-            )} */}
-      <ProjectContainer />
+    const [cardModal, setCardModal] = useState("")
 
-      {/* {modalOpen && (
-                <CardModal />
-            )} */}
-      {/* <CardModal /> */}
-    </div>
-  );
+    const { loading, data } = useQuery(QUERY_ONE_PROJECT, {
+        variables: { projectId: "65ca4844697310a1494d15d0" },
+    });
+
+    const getCard = useQuery(GET_SINGLE_CARD, {
+        variables: { cardId: cardModal.length > 0 ? cardModal : '' },
+    }); 
+
+    if (loading || getCard.loading ) {
+        return (<div>Loading...</div>)
+    }
+
+    return (
+        <div className="gradient-bg px-5 h-screen">
+            <ProjectContainer
+                setCardModal={setCardModal}
+                data={data}
+            />
+            {(cardModal !== "") ? <CardModal card={getCard} setCardModal={setCardModal} /> : <></>}
+
+        </div>
+    )
 }
 
 export default Home;

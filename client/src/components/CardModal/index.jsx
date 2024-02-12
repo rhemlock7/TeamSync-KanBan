@@ -4,16 +4,20 @@ import CommentSection from './CommentSection';
 import MembersDate from './MembersDate';
 import ToDoList from './ToDoList';
 
-function CardModal() {
+function CardModal({setCardModal, card}) {
+
+    const cardData = card.data.card
+    console.log(cardData)
+    
     return (
         <div className="modal-container pb-12">
             <div className='modal'>
                 {/* Card Title & 'X' Button */}
                 <div className='flex justify-between items-center'>
-                    <h2>Card Title</h2>
+                    <h2>{cardData.title}</h2>
                     {/* X button */}
-                    <div className='modal-header flex justify-end -mt-5'>
-                        <p className='text-7xl'>&times;</p>
+                    <div onClick={() => setCardModal('')} className='modal-header flex justify-end -mt-5'>
+                        <p className='text-7xl cursor-pointer'>&times;</p>
                     </div>
                 </div>
 
@@ -21,13 +25,13 @@ function CardModal() {
                 <MembersDate />
 
                 {/* Description */}
-                <CardDescription />
+                <CardDescription description={cardData.description} />
 
                 {/* ToDo List */}
-                <ToDoList />
+                <ToDoList todos={cardData.todoes} />
 
                 {/* Comment Sections */}
-                <CommentSection />
+                <CommentSection comments={cardData.comments} />
             </div>
         </div>
     )
