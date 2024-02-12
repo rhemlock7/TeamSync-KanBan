@@ -79,7 +79,7 @@ const typeDefs = `
     removeCard(cardId: ID!, listId: ID!): Card
     removeList(listId: ID!, projectId: ID!): List
     updateToDo(toDoId: ID!, cardId: ID!, text: String!, isCompleted: Boolean!): Card
-    updateCard(cardId: ID!, description: String!, title: String!): Card
+    updateCard(cardId: ID!, description: String, title: String, expirationDate: String): Card
     updateList(listId: ID!, title: String!): List
     updateProject(projectId: ID!, title: String!): Project
     addUserProject(projectId: ID!, userId: ID!): Project
