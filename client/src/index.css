@@ -3,11 +3,12 @@
 @tailwind utilities;
 
 :root {
-    --orange: #EB5E28;
-    --black: #252422;
-    --darkGray: #403D39;
-    --lightGray: #CCC5B9;
-    --white: #FFFCF2;
+    --accent: #00A8E8;
+    --black: #000f13;
+    --darkGray: #02233b;
+    --lightGray: #007EA7;
+    --offWhite: #ededed;
+    --white: #FFFFFF;
 }
 
 * {
@@ -43,6 +44,20 @@ p {
     font-style: normal;
 }
 
+button {
+    border: 1px solid var(--black);
+    border-radius: 4px;
+    padding: 3px 30px;
+    margin-top: 5px;
+    transition: all 200ms ease;
+}
+
+button:hover {
+    color: var(--white);
+    background-color: var(--black);
+    transform: scale(1.025);
+}
+
 /* Background Color Classes */
 .black-bg {
     background-color: var(--black);
@@ -56,8 +71,17 @@ p {
     background-color: var(--lightGray);
 }
 
+.offWhite-bg {
+    background-color: var(--offWhite);
+}
+
 .white-bg {
     background-color: var(--white);
+}
+
+.gradient-bg {
+    background: rgb(185, 185, 185);
+    background: linear-gradient(338deg, rgba(185, 185, 185, 1) 0%, rgba(230, 230, 230, 1) 43%, rgba(238, 238, 238, 1) 100%);
 }
 
 /* Main Grid */
@@ -75,4 +99,28 @@ p {
 
 .grid-outlet {
     grid-area: 1 / 2 / 2 / 9;
+}
+
+/* Styles by class */
+.button-cta {
+    background-color: var(--accent);
+    padding: 4px 15px;
+    border-radius: 4px;
+    transition: all 200ms ease;
+}
+
+.button-cta:hover {
+    transform: scale(1.025);
+}
+
+.new-list-bttn {
+    background-color: var(--black);
+    color: var(--white);
+    padding: 8px 50px;
+    border-radius: 6px;
+    transition: all 200ms ease;
+}
+
+.new-list-bttn:hover {
+    transform: scale(1.025);
 }

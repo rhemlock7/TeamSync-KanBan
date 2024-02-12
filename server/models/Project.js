@@ -2,15 +2,17 @@ const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
 const projectSchema = new Schema({
-    _id: {
-        type: Schema.Types.ObjectId,
-        require: true
-    },
+
     title: {
         type: String,
         required: true,
         minlength: 1,
         maxlength: 50,
+        trim: true,
+    },
+    createdBy: {
+        type: String,
+        required: true,
         trim: true,
     },
     createdAt: {

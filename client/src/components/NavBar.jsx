@@ -1,10 +1,9 @@
 
 function NavBar() {
     return (
-        <div className="flex justify-between items-center text-white darkGray-bg px-5 py-3">
+        <div className="flex justify-between items-center white-bg px-5 py-6">
             <div className="flex justify-between items-center">
-                <h3 className="mr-3">Logo</h3>
-                <p className="mr-3">Members</p>
+                <p className="mr-5">Members</p>
                 <p>Projects</p>
             </div>
             <div className="flex justify-between items-center">
@@ -15,4 +14,4 @@ function NavBar() {
     )
 }
 
-export default NavBar
+export default NavBar;
