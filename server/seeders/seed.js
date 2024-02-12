@@ -24,6 +24,8 @@ db.once('open', async () => {
       );
     }
 
+    const userArr = await User.find().populate('projects')
+    console.log(userArr);
     const projectsArr = await Project.find().populate('users');
     // console.log(projectsArr);
 

@@ -49,6 +49,7 @@ const typeDefs = `
     me: User
     projects: [Project]
     project(username: String!): Project
+    projectId(projectId: ID!): Project
   }
 
   type Mutation {
