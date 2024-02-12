@@ -1,28 +1,5 @@
 import { gql } from '@apollo/client';
 
-export const LOGIN_USER = gql`
-  mutation login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      token
-      user {
-        _id
-        username
-      }
-    }
-  }
-`;
-
-export const ADD_USER = gql`
-  mutation addUser($username: String!, $email: String!, $password: String!) {
-    addUser(username: $username, email: $email, password: $password) {
-      token
-      user {
-        _id
-        username
-      }
-    }
-  }
-`;
 
 export const QUERY_PROJECTS = gql`
   query QUERY_PROJECTS {
@@ -74,6 +51,29 @@ query getProjectByID($projectId: ID!) {
           createdAt
         }
       }
+    }
+  }
+}
+`;
+
+export const GET_SINGLE_CARD = gql`
+query GetCard($cardId: ID!) {
+  card(cardId: $cardId) {
+    _id
+    title
+    listId
+    description
+    createdAt
+    comments {
+      _id
+      commentText
+      commentAuthor
+      createdAt
+    }
+    toDoes {
+      _id
+      text
+      isCompleted
     }
   }
 }

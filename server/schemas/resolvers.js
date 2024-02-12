@@ -5,7 +5,7 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find();
+      return User.find().populate('projects');
     },
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate('projects');
@@ -34,6 +34,9 @@ const resolvers = {
           populate: [{ path: "comments" }, { path: "toDoes" }]
         }
       }).populate('users');
+    },
+    card: async (parent, { cardId }) => {
+      return Card.findOne({ _id: cardId }).populate('comments').populate('toDoes')
     }
   },
 
@@ -61,12 +64,11 @@ const resolvers = {
       return { token, user };
     },
     addProject: async (parent, { title, projectAuthor, authId }) => {
-      const project = await Project.create({ title, users: [authId] });
+      const project = await Project.create({ title, createdBy: projectAuthor, users: [authId] });
       await User.findOneAndUpdate(
-        { username: projectAuthor },
+        { _id: authId },
         { $addToSet: { projects: project._id } }
       );
-
       return project;
     },
 
@@ -136,6 +138,42 @@ const resolvers = {
       await Project.findOneAndUpdate({ _id: projectId }, { $pull: { lists: list._id } });
       return list;
     },
+    updateToDo: async (parent, { toDoId, cardId, text, isCompleted }) => {
+      let card = await Card.findOneAndUpdate({ "_id": cardId, "toDoes._id": toDoId }, {
+        $set: {
+          "toDoes.$": { text: text, isCompleted: isCompleted }
+        }
+      },
+        { new: true })
+      return card;
+    },
+    updateCard: async (parent, { cardId, description, title }) => {
+      return Card.findOneAndUpdate({
+        _id: cardId
+      }, { description, title }, { new: true })
+    },
+    updateList: async (parent, { listId, title }) => {
+      return List.findOneAndUpdate({
+        _id: listId
+      }, { title }, { new: true })
+    },
+    updateProject: async (parent, { projectId, title }) => {
+      return Project.findOneAndUpdate({
+        _id: projectId
+      }, { title }, { new: true })
+    },
+    addUserProject: async (parent, { projectId, userId }) => {
+      return Project.findOneAndUpdate({
+        _id: projectId
+      }, { $addToSet: { users: userId } }, { new: true })
+    },
+    removeProject: async (parent, { projectId, userId }) => {
+      let project = Project.findOneAndDelete({
+        _id: projectId
+      });
+      await User.findOneAndUpdate({ _id: userId }, { $pull: { projects: project._id } });
+      return project;
+    }
   },
 };
 
