@@ -1,34 +1,32 @@
-// import { useState } from "react";
-// import { useQuery } from '@apollo/client';
+import React from "react";
+// import { useHistory } from "react-router-dom";
 import ProjectContainer from "../components/ProjectContainer";
 import CardModal from "../components/CardModal";
-
-// import { QUERY_PROJECTS } from '../utils/queries'
-
-// const { data } = useQuery(QUERY_PROJECTS);
-// const projects = data?.projects || [];
-
-// console.log(projects)
+import { useQuery } from "@apollo/client";
+import { QUERY_PROJECTS } from '../utils/queries'
+import Auth from '../utils/auth';
 
 function Home() {
-    // const [modalOpen, setModalOpen] = useState(false)
+    // const history = useHistory([]);
+    const { loading, data } = useQuery(QUERY_PROJECTS);
+
+    if (!Auth.loggedIn()) {
+        window.location.assign("/login");
+        
+    }
+
+    const projects = data?.projects || [];
 
     return (
         <div className="gradient-bg px-5 h-screen">
-            {/* {loading ? (
+            {loading ? (
                 <div>Loading...</div>
             ) : (
                 <ProjectContainer />
-            )} */}
-            <ProjectContainer />
-
-            {/* {modalOpen && (
-                <CardModal />
-            )} */}
+            )}
             <CardModal />
-
         </div>
-    )
+    );
 }
 
-export default Home
+export default Home;

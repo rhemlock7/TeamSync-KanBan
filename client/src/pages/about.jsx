@@ -1,10 +1,9 @@
 import React from "react";
-
 const people = [
   {
     name: "Ryan Hemlock",
     role: "Co-Founder / CEO",
-    imageUrl: "",
+    imageUrl: "../src/assets/ryan.png",
   },
   {
     name: "Mustapha Kromah",
@@ -14,57 +13,52 @@ const people = [
   {
     name: "Mykhalio Zakharkiv",
     role: "Co-Founder / CEO",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    imageUrl:"../src/assets/mykhalio.png"
   },
 ];
 
 export default function About() {
   return (
     <div className="bg-white py-24 sm:py-32">
-      <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
-        <div className="max-w-2xl">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Meet our leadership
-          </h2>
-          <p className="mt-6 text-lg leading-8 text-gray-600">
-            Libero fames augue nisl porttitor nisi, quis. Id ac elit odio vitae
-            elementum enim vitae ullamcorper suspendisse.
-          </p>
-        </div>
-        <ul
-          role="list"
-          className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
-        >
-          {people.map((person) => (
-            <li key={person.name}>
-              <div className="flex items-center gap-x-6">
-                <img
-                  className="h-24 w-24 rounded-full object-cover"
-                  src={person.imageUrl}
-                  alt=""
-                />
-                <div>
-                  <h3 className="text-lg font-semibold leading-7 text-gray-900">
-                    {person.name}
-                  </h3>
-                  <p className="text-base font-semibold leading-6 text-gray-600">
-                    {person.role}
-                  </p>
-                </div>
+    <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
+      <div className="max-w-2xl">
+        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          Meet our leadership
+        </h2>
+        <p className="mt-6 text-lg leading-8 text-gray-600">
+          Libero fames augue nisl porttitor nisi, quis. Id ac elit odio vitae
+          elementum enim vitae ullamcorper suspendisse.
+        </p>
+      </div>
+      <ul
+        role="list"
+        className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
+      > 
+      {people.map((person) => (
+        <li key={person.name}>
+          <div className="flex items-center gap-x-6">
+            <img
+              className="h-24 w-24 rounded-full object-cover"
+              src={person.imageUrl}
+              alt=""
+            />
+            <div>
+              <h3 className="text-lg font-semibold leading-7 text-gray-900">
+                {person.name}
+              </h3>
+              <p className="text-base font-semibold leading-6 text-gray-600">
+                {person.role}
+              </p>
+            </div>
               </div>
             </li>
           ))}
         </ul>
       </div>
-    </div>
-  
-
-
       <div className="flex items-stretch justify-center">
         <div className="grid md:grid-cols-2">
           <div className="h-full pr-6">
-            <p className="mt-3 mb-12 text-lg text-gray-800">
+            <p className="mt-20 mb-12 text-lg text-gray-800">
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est
               aperiam dolore facilis nulla dignissimos quasi accusamus,
               temporibus recusandae, ab inventore quibusdam dolor beatae
@@ -72,7 +66,7 @@ export default function About() {
             </p>
             <ul className="mb-6 md:mb-0">
               <li className="flex">
-                <div className="flex h-10 w-10 items-center justify-center rounded bg-green-600 text-gray-50">
+                <div className="flex h-10 w-10 items-center justify-center rounded darkGray-bg text-gray-50">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -102,7 +96,7 @@ export default function About() {
                 </div>
               </li>
               <li className="flex">
-                <div className="flex h-10 w-10 items-center justify-center rounded bg-green-600 text-gray-50">
+                <div className="flex h-10 w-10 items-center justify-center rounded darkGray-bg text-gray-50">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -129,7 +123,7 @@ export default function About() {
                   </p>
                   <p className="text-gray-600 dark:text-slate-600">
                     Mail: customerservice@
-                    <a href="/" className="text-green-600">
+                    <a href="/" className="text-gray-600">
                       Project 3
                     </a>
                     .com
@@ -137,7 +131,7 @@ export default function About() {
                 </div>
               </li>
               <li className="flex">
-                <div className="flex h-10 w-10 items-center justify-center rounded bg-green-600 text-gray-50">
+                <div className="flex h-10 w-10 items-center justify-center rounded darkGray-bg text-gray-50">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -183,7 +177,7 @@ export default function About() {
                       id="name"
                       autoComplete="given-name"
                       placeholder="Your name"
-                      className="mb-2 w-full rounded-md border focus:ring-green-600 focus:border-green-600 border-gray-400 py-2 pl-2 pr-4 shadow-md dark:text-gray-300 sm:mb-0"
+                      className="mb-2 w-full rounded-md border focus:ring-gray-600 focus:border-gray-600 border-gray-400 py-2 pl-2 pr-4 shadow-md dark:text-gray-300 sm:mb-0"
                       name="name"
                     ></input>
                   </div>
@@ -197,7 +191,7 @@ export default function About() {
                       id="email"
                       autoComplete="email"
                       placeholder="Your email address"
-                      className="mb-2 w-full rounded-md border focus:ring-green-600 focus:border-green-600 border-gray-400 py-2 pl-2 pr-4 shadow-md dark:text-gray-300 sm:mb-0"
+                      className="mb-2 w-full rounded-md border focus:ring-gray-600 focus:border-gray-600 border-gray-400 py-2 pl-2 pr-4 shadow-md dark:text-gray-300 sm:mb-0"
                       name="email"
                     ></input>
                   </div>
@@ -213,14 +207,14 @@ export default function About() {
                     cols="30"
                     rows="5"
                     placeholder="Write your message..."
-                    className="mb-2 w-full rounded-md border focus:ring-green-600 focus:border-green-600 border-gray-400 py-2 pl-2 pr-4 shadow-md sm:mb-0"
+                    className="mb-2 w-full rounded-md border focus:ring-gray-600 focus:border-gray-600 border-gray-400 py-2 pl-2 pr-4 shadow-md sm:mb-0"
                   ></textarea>
                 </div>
               </div>
               <div className="text-center">
                 <button
                   type="submit"
-                  className="w-full bg-green-600 text-white px-6 py-3 font-xl rounded-md hover:bg-green-500 sm:mb-0"
+                  className="w-full darkGray-bg text-white px-6 py-3 font-xl rounded-md hover:bg-gray-500 sm:mb-0"
                 >
                   Send Message
                 </button>

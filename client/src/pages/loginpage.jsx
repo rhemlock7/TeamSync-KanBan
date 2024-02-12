@@ -25,28 +25,28 @@ const Login = () => {
   };
 
   return (
-    <section className="h-full flex flex-col items-center justify-center">
+    <section className=" flex flex-col items-center justify-center">
       <div className="text-center mb-10 text-3xl">
-        <img
+        {/* <img
           className="mx-auto w-48"
           src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
           alt="logo"
-        />
-        <h4 className="mt-4 text-xl font-semibold text-navy-900">We are Project 3 Team</h4>
+        /> */}
+        <h4 className=" text-xl font-semibold">We are Project 3 Team</h4>
       </div>
 
-      <div className="bg-gray-100 rounded-md p-8 max-w-md w-full lg:w-2/3 text-gray-700">
-        <h1 className="text-center text-lg font-semibold mb-6">Login</h1>
+      <div className="darkGray-bg login-card rounded-lg p-10 max-w-3xl w-full lg:w-4/4 text-gray-700 shadow-xl">
+        <h2 className="text-center text-white text-lg font-bold mb-6">Login</h2>
 
         {data ? (
-          <p className="text-center text-navy-600">
+          <p className="text-center text-gray-600">
             Success! You may now head{' '}
-            <Link to="/" className="text-navy-600 hover:text-navy-500">back to the homepage.</Link>
+            <Link to="/" className="text-white">back to the homepage.</Link>
           </p>
         ) : (
           <form onSubmit={handleFormSubmit} className="space-y-4">
             <div>
-              <label htmlFor="email" className="block text-lg font-large">Email address</label>
+              <label htmlFor="email" className="block text-lg text-white font-medium">Email address</label>
               <input
                 id="email"
                 value={formState.email}
@@ -54,16 +54,13 @@ const Login = () => {
                 name="email"
                 type="email"
                 autoComplete="email"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-navy-500 focus:border-navy-500 sm:text-lg"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-lg"
                 required
               />
             </div>
 
             <div>
-              <div className="flex justify-between">
-                <label htmlFor="password" className="block text-lg font-large">Password</label>
-                <Link to="/forgot-password" className="text-sm text-navy-600 hover:text-navy-500">Forgot password?</Link>
-              </div>
+              <label htmlFor="password" className="block text-lg text-white font-medium">Password</label>
               <input
                 id="password"
                 value={formState.password}
@@ -71,7 +68,7 @@ const Login = () => {
                 name="password"
                 type="password"
                 autoComplete="current-password"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-grey-800 focus:border-navy-500 sm:text-lg"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-lg"
                 required
               />
             </div>
@@ -80,7 +77,7 @@ const Login = () => {
               <button
                 id="login-btn"
                 type="submit"
-                className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-navy-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-navy-500"
+                className="w-full inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-lg font-medium rounded-md text-white bg-gray-900 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
               >
                 Sign in
               </button>
@@ -94,9 +91,9 @@ const Login = () => {
           </div>
         )}
 
-        {/* Signup Section */}
-        <p className="mt-4 text-center text-sm text-navy-500">
-          Not a member? <Link to="/signup" className="font-semibold leading-6 text-grey-600 hover:text-navy-500">Sign up</Link>
+      
+        <p className="mt-4 text-center text-lg text-white">
+          Not a member? <Link to="/signup" className="font-semibold leading-6 text-gray-600 hover:text-white">Sign up</Link>
         </p>
       </div>
     </section>

@@ -39,18 +39,18 @@ const Signup = () => {
   };
 
   return (
-    <section className="h-full flex flex-col items-center justify-center">
+    <section className="flex flex-col items-center justify-center">
       <div className="text-center mb-10 text-3xl">
-        <img
+        {/* <img
           className="mx-auto w-48"
           src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
           alt="logo"
-        />
+        /> */}
         <h4 className="mt-4 text-xl font-semibold">We are Project 3 Team</h4>
       </div>
 
-      <div className="bg-gray-100 rounded-md p-8 max-w-md w-full lg:w-2/3 text-gray-700">
-        <h2 className="text-center text-lg font-semibold mb-6">Sign Up</h2>
+      <div className="darkGray-bg login-card rounded-lg p-10 max-w-3xl w-full lg:w-4/4 text-gray-700 shadow-xl">
+        <h2 className="text-center text-white text-lg font-bold mb-6">Sign Up</h2>
 
         {data ? (
           <p className="text-center text-gray-600">
@@ -60,7 +60,7 @@ const Signup = () => {
         ) : (
           <form onSubmit={handleFormSubmit} className="space-y-4">
             <div>
-              <label htmlFor="username" className="block text-lg font-medium">Username</label>
+              <label htmlFor="username" className="block text-lg text-white font-medium">Username</label>
               <input
                 id="username"
                 value={formState.username}
@@ -68,13 +68,13 @@ const Signup = () => {
                 name="username"
                 type="text"
                 autoComplete="username"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-lg"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-lg"
                 required
               />
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-lg font-medium">Email address</label>
+              <label htmlFor="email" className="block text-lg text-white font-medium">Email address</label>
               <input
                 id="email"
                 value={formState.email}
@@ -82,13 +82,13 @@ const Signup = () => {
                 name="email"
                 type="email"
                 autoComplete="email"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-lg"
+                className="mt-5 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-lg"
                 required
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-lg font-medium">Password</label>
+              <label htmlFor="password" className="block text-lg text-white  font-medium">Password</label>
               <input
                 id="password"
                 value={formState.password}
@@ -96,13 +96,13 @@ const Signup = () => {
                 name="password"
                 type="password"
                 autoComplete="new-password"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-lg"
+                className="mt-5 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-lg"
                 required
               />
             </div>
 
             <div>
-              <label htmlFor="confirmPassword" className="block text-lg font-medium">Confirm Password</label>
+              <label htmlFor="confirmPassword" className="block text-lg text-white  font-medium">Confirm Password</label>
               <input
                 id="confirmPassword"
                 value={formState.confirmPassword}
@@ -110,7 +110,7 @@ const Signup = () => {
                 name="confirmPassword"
                 type="password"
                 autoComplete="new-password"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-lg"
+                className="mt-5 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-lg"
                 required
               />
             </div>
@@ -118,7 +118,7 @@ const Signup = () => {
             <div>
               <button
                 type="submit"
-                className="w-full inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-lg font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                className="w-full inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-lg font-medium rounded-md text-white bg-gray-900 hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
               >
                 Sign up
               </button>
@@ -132,9 +132,9 @@ const Signup = () => {
           </div>
         )}
 
-        {/* Login Section */}
-        <p className="mt-4 text-center text-lg text-gray-500">
-          Already a member? <Link to="/login" className="font-semibold leading-6 text-gray-600 hover:text-gray-500">Log in</Link>
+      
+        <p className="mt-4 text-center text-lg text-white ">
+          Already a member? <Link to="/login" className="font-semibold leading-6 text-white hover:text-gray0">Log in</Link>
         </p>
       </div>
     </section>
