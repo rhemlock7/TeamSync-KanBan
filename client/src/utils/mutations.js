@@ -167,3 +167,37 @@ mutation RemoveToDo($cardId: ID!, $toDoId: ID!) {
   }
 }
 `;
+
+export const REMOVE_LIST = gql`
+mutation RemoveList($listId: ID!, $projectId: ID!) {
+  removeList(listId: $listId, projectId: $projectId) {
+    _id
+    title
+    projectId
+  }
+}
+`;
+
+export const REMOVE_CARD = gql`
+mutation RemoveCard($cardId: ID!, $listId: ID!) {
+  removeCard(cardId: $cardId, listId: $listId) {
+    _id
+    title
+    description
+    listId
+  }
+}
+`;
+
+export const ADD_USER_PROJECT = gql`
+mutation AddUserProject($projectId: ID!, $userId: ID!) {
+  addUserProject(projectId: $projectId, userId: $userId) {
+    title
+    users {
+      _id
+      username
+    }
+    _id
+  }
+}
+`;
