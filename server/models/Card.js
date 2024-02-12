@@ -20,6 +20,7 @@ const cardSchema = new Schema({
         trim: true,
 
     },
+    // iscompldeted
     createdAt: {
         type: Date,
         default: Date.now,

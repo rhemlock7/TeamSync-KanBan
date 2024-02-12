@@ -17,11 +17,28 @@ const resolvers = {
       throw AuthenticationError;
     },
     projects: async () => {
-      return Project.find().populate('lists').populate('users');
+      let projects = Project.find().populate({
+        path: 'lists',
+        populate: {
+          path: "cards",
+          populate: { path: "comments" }
+        }
+      }).populate('users');
+      console.log(projects);
+      return projects
     },
     project: async (parent, { projectname }) => {
       return Project.findOne({ projectname }).populate('lists');
     },
+    projectId: async (parent, { projectId }) => {
+      return Project.findOne({ _id: projectId }).populate({
+        path: 'lists',
+        populate: {
+          path: "cards",
+          populate: { path: "comments" }
+        }
+      }).populate('users');
+    }
   },
 
   Mutation: {
