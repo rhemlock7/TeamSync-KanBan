@@ -8,7 +8,7 @@ import Error from './pages/Error';
 import Login from './pages/loginpage.jsx';
 import Signup from './pages/signup.jsx';
 import About from './pages/about.jsx';
-
+import Landing from './pages/landingpage.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -30,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: '/about',
         element: <About />
+      },
+      {
+        path: '/landing',
+        element: <Landing />
       }
     ]
   }
