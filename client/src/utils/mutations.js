@@ -200,3 +200,15 @@ mutation AddUserProject($projectId: ID!, $userId: ID!) {
   }
 }
 `;
+
+export const UPDATE_USER = gql`
+mutation UpdateUser($userId: ID!, $username: String, $email: String, $gitHub: String, $password: String, $img: String) {
+  updateUser(userId: $userId, username: $username, email: $email, gitHub: $gitHub, password: $password, img: $img) {
+    _id
+    username
+    gitHub
+    email
+    img
+  }
+}
+`;
