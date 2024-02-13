@@ -1,7 +1,7 @@
 // import { useState } from "react";
 // import { useQuery } from '@apollo/client';
 import ProjectContainer from "../components/ProjectContainer";
-import CardModal from "../components/CardModal";
+// import CardModal from "../components/CardModal";
 
 // import { QUERY_PROJECTS } from '../utils/queries'
 
@@ -25,7 +25,7 @@ function Home() {
             {/* {modalOpen && (
                 <CardModal />
             )} */}
-            <CardModal />
+            {/* <CardModal /> */}
 
         </div>
     )
