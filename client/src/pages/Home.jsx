@@ -1,36 +1,38 @@
-// import { useState } from "react";
-import {useQuery} from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import ProjectContainer from "../components/ProjectContainer";
-// import CardModal from "../components/CardModal";
+import ProjectSideNav from '../components/ProjectSideNav';
 
-import {QUERY_ONE_PROJECT} from "../utils/queries";
 
-// const projects = data?.projects || [];
-// const {data} = useQuery(QUERY_SINGLE_PROJECT);
+import { QUERY_ONE_PROJECT } from "../utils/queries";
 
-// console.log(projects)
+
 
 function Home() {
-  // const [modalOpen, setModalOpen] = useState(false)
-  const {loading, data} = useQuery(QUERY_ONE_PROJECT, {
-    variables: {projectId: "65ca3d0fe0a69bbcb868de5c"},
-  });
-  console.log(data);
-  return (
-    <div className="gradient-bg px-5 h-screen">
-      {/* {loading ? (
-                <div>Loading...</div>
-            ) : (
-                <ProjectContainer />
-            )} */}
-      <ProjectContainer />
+    const { loading, data } = useQuery(QUERY_ONE_PROJECT, {
+        variables: { projectId: "65ca4844697310a1494d15d0" },
+    });
 
-      {/* {modalOpen && (
-                <CardModal />
-            )} */}
-      {/* <CardModal /> */}
-    </div>
-  );
+    if (loading) {
+        return (<div>Loading...</div>)
+    }
+
+    return (
+        <div className='grid-container h-screen'>
+            <div className='project-nav darkGray-bg text-white'>
+                <ProjectSideNav />
+            </div>
+            <div className='grid-outlet'>
+                
+                <div className="gradient-bg px-5 h-screen">
+                    <ProjectContainer
+                        data={data}
+                        projectId={data.projectId._id}
+                    />
+                </div>
+            </div>
+        </div>
+
+    )
 }
 
 export default Home;
