@@ -78,3 +78,4 @@ query GetCard($cardId: ID!) {
   }
 }
 `;
+
