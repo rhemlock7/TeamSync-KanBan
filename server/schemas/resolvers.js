@@ -135,6 +135,7 @@ const resolvers = {
     },
     removeList: async (parent, { listId, projectId }) => {
       let list = await List.findOneAndDelete({ _id: listId });
+      await Card.deleteMany({ listId: list._id });
       await Project.findOneAndUpdate({ _id: projectId }, { $pull: { lists: list._id } });
       return list;
     },
