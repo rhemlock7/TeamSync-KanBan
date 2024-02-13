@@ -172,6 +172,7 @@ const resolvers = {
       let project = Project.findOneAndDelete({
         _id: projectId
       });
+      await List.deleteMany({ projectId: projectId });
       await User.findOneAndUpdate({ _id: userId }, { $pull: { projects: project._id } });
       return project;
     },
