@@ -1,10 +1,23 @@
 import Draggable from 'react-draggable';
+import { useState } from "react";
+import { useQuery } from "@apollo/client";
+import CardModal from "../components/CardModal";
 
-function CardPreview({cards, setCardModal}) {
+import { GET_SINGLE_CARD } from "../utils/queries";
 
-    // handle whats clicked to setCardmodal to home cardModal state
+
+function CardPreview({cards}) {
+    const [cardModal, setCardModal] = useState("")
 
     const listOfCards = cards.cards
+
+    const getCard = useQuery(GET_SINGLE_CARD, {
+        variables: { cardId: cardModal.length > 0 ? cardModal : '' },
+    }); 
+
+    if (getCard.loading ) {
+        return (<></>)
+    }
 
     return (
         <>
@@ -17,6 +30,7 @@ function CardPreview({cards, setCardModal}) {
                 </div>
             </Draggable>
         ))}
+        {(cardModal !== "") ? <CardModal card={getCard} setCardModal={setCardModal} /> : <></>}
         </>
     )
 }

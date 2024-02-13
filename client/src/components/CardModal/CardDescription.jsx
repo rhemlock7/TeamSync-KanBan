@@ -3,16 +3,28 @@ import { Input } from 'antd';
 
 const { TextArea } = Input;
 
-// State
+// // State
 // const [editText, setEditText] = useState('');
 // const [description, setDescription] = useState('');
 
-// function handleDescription () {
+// function handleDescription() {
 //     setDescription('New Description')
 // }
 
-function CardDescription({description}) {
-    
+function CardDescription({ description }) {
+
+    // // State
+    // const [editText, setEditText] = useState('');
+    // const [description, setDescription] = useState(description);
+
+    // function handleDescription() {
+    //     setDescription('New Description')
+    // }
+
+    // function handleEditText(e) {
+    //     setEditText(e.target.value);
+    // }
+
     return (
         <section className='my-4'>
             <h3>Description</h3>

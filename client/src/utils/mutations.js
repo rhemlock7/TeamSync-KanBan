@@ -41,7 +41,6 @@ mutation AddList($title: String!, $projectId: ID!) {
     projectId
   }
 }
-}
 `;
 
 export const ADD_CARD = gql`

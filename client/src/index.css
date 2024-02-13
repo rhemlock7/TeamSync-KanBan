@@ -126,3 +126,8 @@ button:hover {
     transform: scale(1.025);
     background-color: var(--black);
 }
+
+/* Styles by ID */
+#list-input {
+    border: 1px solid var(--black);
+}
