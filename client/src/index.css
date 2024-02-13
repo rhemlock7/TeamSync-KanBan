@@ -22,6 +22,7 @@ h1 {
     font-variation-settings: "ital" 0, "wdth" 100, "wght" 800;
     font-weight: 800;
     font-size: 3em;
+    
 }
 
 h2 {
@@ -111,7 +112,6 @@ button:hover {
 
 .button-cta:hover {
     transform: scale(1.025);
-    background-color: var(--accent);
 }
 
 .new-list-bttn {
@@ -124,10 +124,15 @@ button:hover {
 
 .new-list-bttn:hover {
     transform: scale(1.025);
-    background-color: var(--black);
 }
+.login-card {
+  /* Resting shadow with multiple colors */
+  box-shadow: 0px 8px 16px ,
+    10px 22px 32px rgb(4, 0, 71);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  border-radius: 10px;
+}
+.login-btn{
 
-/* Styles by ID */
-#list-input {
-    border: 1px solid var(--black);
+  color: rgb(24, 15, 196);
 }
