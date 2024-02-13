@@ -112,10 +112,11 @@ button:hover {
 
 .button-cta:hover {
     transform: scale(1.025);
+    background-color: var(--accent);
 }
 
 .new-list-bttn {
-    background-color: var(--black);
+    background-color: var(--darkGray);
     color: var(--white);
     padding: 8px 50px;
     border-radius: 6px;
@@ -124,6 +125,7 @@ button:hover {
 
 .new-list-bttn:hover {
     transform: scale(1.025);
+    background-color: var(--darkGray);
 }
 .login-card {
   /* Resting shadow with multiple colors */

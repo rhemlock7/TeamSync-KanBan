@@ -4,9 +4,15 @@ import {useMutation} from "@apollo/client";
 import {useState} from "react";
 import {ADD_LIST} from "../utils/mutations";
 import List from "./List";
+// import { AntDesignOutlined, UserOutlined } from '@ant-design/icons';
+import {Avatar} from "antd";
+// import { Avatar, Tooltip } from 'antd';
+import {useMutation} from "@apollo/client";
+import {useState} from "react";
+import {ADD_LIST} from "../utils/mutations";
+import List from "./List";
 
 function ProjectContainer({projectId, data}) {
-  console.log(data);
   const [title, setTitle] = useState("");
   const [showInput, setShowInput] = useState(false);
 
@@ -25,12 +31,12 @@ function ProjectContainer({projectId, data}) {
     setTitle(e.target.value);
   }
 
-  const lists = data?.lists || [];
+  const lists = data.projectId?.lists || [];
 
   return (
     <div>
       <div className="flex justify-start items-center">
-        <h1>{data.title}</h1>
+        <h1>{data.projectId.title}</h1>
         <div className="ml-5 mt-2">
           <Avatar.Group
             maxCount={2}
