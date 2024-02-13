@@ -1,4 +1,43 @@
+import {useState} from "react";
 export default function ProfileSetting() {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [gitHub, setGitHub] = useState("");
+  const [linkedIn, setLinkedIn] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
+  const [change, setChange] = useState(false);
+
+  function handleUsername(e) {
+    e.preventDefault();
+    setUsername(e.target.value);
+    // console.log(username);
+  }
+  function handleEmail(e) {
+    e.preventDefault();
+    setEmail(e.target.value);
+    // console.log(email);
+  }
+  function handleGitHub(e) {
+    e.preventDefault();
+    setGitHub(e.target.value);
+    // console.log(gitHub);
+  }
+  function handleLinkedIn(e) {
+    e.preventDefault();
+    setLinkedIn(e.target.value);
+    // console.log(linkedIn);
+  }
+  function handleImgUrl(e) {
+    e.preventDefault();
+    setImgUrl(e.target.value);
+    // console.log(linkedIn);
+  }
+
+  function handleChange() {
+    setChange(!change);
+    console.log(change);
+  }
+
   return (
     <div className="bg-white w-full flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row text-[#161931]">
       <main className="w-full min-h-screen py-1 md:w-2/3 lg:w-3/4">
@@ -20,25 +59,35 @@ export default function ProfileSetting() {
                   <button
                     type="button"
                     className="py-3.5 px-7 text-base font-medium text-indigo-100 focus:outline-none bg-[#202142] rounded-lg border border-indigo-200 hover:bg-indigo-900 focus:z-10 focus:ring-4 focus:ring-indigo-200 "
+                    onClick={handleChange}
                   >
-                    Change picture
+                    {change ? "Close form" : "Change picture"}
                   </button>
-                  <button
-                    type="button"
-                    className="py-3.5 px-7 text-base font-medium text-indigo-900 focus:outline-none bg-white rounded-lg border border-indigo-200 hover:bg-indigo-100 hover:text-[#202142] focus:z-10 focus:ring-4 focus:ring-indigo-200 "
-                  >
-                    Delete picture
-                  </button>
+                  {change ? (
+                    <form>
+                      <label className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">
+                        Your Image URL
+                      </label>
+                      <input
+                        type="url"
+                        id="image"
+                        className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
+                        placeholder="Your Image URL"
+                        value={imgUrl}
+                        onChange={handleImgUrl}
+                        required
+                      />
+                    </form>
+                  ) : (
+                    <></>
+                  )}
                 </div>
               </div>
 
               <div className="items-center mt-8 sm:mt-14 text-[#202142]">
                 <div className="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
                   <div className="w-full">
-                    <label
-                      for="first_name"
-                      className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white"
-                    >
+                    <label className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">
                       Your username
                     </label>
                     <input
@@ -46,17 +95,15 @@ export default function ProfileSetting() {
                       id="username"
                       className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
                       placeholder="Your username"
-                      value=""
+                      value={username}
+                      onChange={handleUsername}
                       required
                     />
                   </div>
                 </div>
 
                 <div className="mb-2 sm:mb-6">
-                  <label
-                    for="email"
-                    className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white"
-                  >
+                  <label className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">
                     Your email
                   </label>
                   <input
@@ -65,15 +112,14 @@ export default function ProfileSetting() {
                     className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
                     placeholder="Your email@mail.com"
                     required
+                    value={email}
+                    onChange={handleEmail}
                   />
                 </div>
 
                 <div className="mb-2 sm:mb-6">
-                  <label
-                    for="gitHub"
-                    className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white"
-                  >
-                    Profession
+                  <label className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">
+                    GitHub:
                   </label>
                   <input
                     type="text"
@@ -81,15 +127,14 @@ export default function ProfileSetting() {
                     className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
                     placeholder="Your GitHub link"
                     required
+                    value={gitHub}
+                    onChange={handleGitHub}
                   />
                 </div>
 
                 <div className="mb-2 sm:mb-6">
-                  <label
-                    for="gitHub"
-                    className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white"
-                  >
-                    Profession
+                  <label className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">
+                    LinkedIn
                   </label>
                   <input
                     type="text"
@@ -97,6 +142,8 @@ export default function ProfileSetting() {
                     className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
                     placeholder="Your LinkedIn link"
                     required
+                    value={linkedIn}
+                    onChange={handleLinkedIn}
                   />
                 </div>
 
