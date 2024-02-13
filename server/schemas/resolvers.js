@@ -147,10 +147,10 @@ const resolvers = {
         { new: true })
       return card;
     },
-    updateCard: async (parent, { cardId, description, title }) => {
+    updateCard: async (parent, { cardId, description, title, expirationDate }) => {
       return Card.findOneAndUpdate({
         _id: cardId
-      }, { description, title }, { new: true })
+      }, { description, title, expirationDate }, { new: true })
     },
     updateList: async (parent, { listId, title }) => {
       return List.findOneAndUpdate({

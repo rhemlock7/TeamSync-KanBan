@@ -20,7 +20,11 @@ const cardSchema = new Schema({
         trim: true,
 
     },
-    // iscompldeted
+    expirationDate: {
+        type: Date,
+        default: Date.now,
+        get: (timestamp) => dateFormat(timestamp),
+    },
     createdAt: {
         type: Date,
         default: Date.now,
