@@ -87,7 +87,41 @@ query GetUser($userId: ID!) {
     email
     gitHub
     img
+    projects {
+      _id
+      title
+      createdAt
+      createdBy
+      users {
+        _id
+        username
+      }
+      lists {
+        _id
+        title
+        projectId
+        cards {
+          _id
+          title
+          listId
+          description
+          createdAt
+          comments {
+            _id
+            commentText
+            commentAuthor
+            createdAt
+          }
+          toDoes {
+            _id
+            text
+            isCompleted
+          }
+        }
+      }
+    }
   }
 }
+
 `;
 

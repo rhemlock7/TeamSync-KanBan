@@ -1,16 +1,31 @@
 import {useQuery} from "@apollo/client";
 import ProjectContainer from "../components/ProjectContainer";
 import ProjectSideNav from "../components/ProjectSideNav";
-
-import {QUERY_ONE_PROJECT} from "../utils/queries";
+import Auth from "../utils/auth";
+import {GET_USER, QUERY_ONE_PROJECT} from "../utils/queries";
 
 function Home() {
-  const {loading, data} = useQuery(QUERY_ONE_PROJECT, {
-    variables: {projectId: "65cbb0a0631cc7da51003c33"},
-  });
+  //   if (!Auth.loggedIn()) {
+  //     window.location.assign("/");
+  //   }
+  //   const {loading, data} = useQuery(GET_USER, {
+  //     variables: {userId: Auth.getProfile().authenticatedPerson._id},
+  //   });
+  //   const datanew = user.data;
+  //   const loadingnew = user.loading;
+  //   if (loadingnew) {
+  //     return <div>Loading...</div>;
+  //   }
 
-  if (loading) {
-    return <div>Loading...</div>;
+  //   const {loading, data} = useQuery(QUERY_ONE_PROJECT, {
+  //     variables: {projectId: datanew.user.projects[0]._id},
+  //   });
+
+  //   if (loading) {
+  //     return <div>Loading...</div>;
+  //   }
+  if (true) {
+    return <div>No projects yet, Add new project</div>;
   }
 
   return (
@@ -20,7 +35,14 @@ function Home() {
       </div>
       <div className="grid-outlet">
         <div className="gradient-bg px-5 h-screen">
-          <ProjectContainer data={data} projectId={data.projectId._id} />
+          {loading ? (
+            "loading"
+          ) : (
+            <ProjectContainer
+              data={data.user.projects[0]}
+              projectId={data.user.projects[0]._id}
+            />
+          )}
         </div>
       </div>
     </div>

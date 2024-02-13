@@ -5,6 +5,9 @@ import {useQuery, useMutation} from "@apollo/client";
 import Auth from "../utils/auth";
 import {UPDATE_USER} from "../utils/mutations";
 export default function ProfileSetting() {
+  if (!Auth.loggedIn()) {
+    window.location.assign("/");
+  }
   const {profileId} = useParams();
   const {loading, data} = useQuery(GET_USER, {
     variables: {userId: profileId},
@@ -19,56 +22,66 @@ export default function ProfileSetting() {
   if (loading) {
     return <div>Loading...</div>;
   }
-  console.log(data);
-  function init() {
-    useEffect(() => {
-      setUsername(data.user.username);
-      setEmail(data.user.email);
-      if (data.user.linkedIn) {
-        setLinkedIn(data.user.linkedIn);
-      }
-      if (data.user.gitHub) {
-        setGitHub(data.user.gitHub);
-      }
-      setImgUrl(data.user.img);
-    }, []);
-  }
+  //   console.log(data);
 
-  //   init();
+  //   useEffect(() => {
+  //     if (!loading) {
+  //       setUsername(data.user.username);
+  //       setEmail(data.user.email);
+  //       if (data.user.linkedIn) {
+  //         setLinkedIn(data.user.linkedIn);
+  //       }
+  //       if (data.user.gitHub) {
+  //         setGitHub(data.user.gitHub);
+  //       }
+  //       setImgUrl(data.user.img);
+  //     }
+  //   }, []);
 
   function handleUsername(e) {
     e.preventDefault();
     setUsername(e.target.value);
-    // console.log(username);
   }
   function handleEmail(e) {
     e.preventDefault();
     setEmail(e.target.value);
-    // console.log(email);
   }
   function handleGitHub(e) {
     e.preventDefault();
     setGitHub(e.target.value);
-    // console.log(gitHub);
   }
   function handleLinkedIn(e) {
     e.preventDefault();
     setLinkedIn(e.target.value);
-    // console.log(linkedIn);
   }
   function handleImgUrl(e) {
     e.preventDefault();
     setImgUrl(e.target.value);
-    // console.log(linkedIn);
+    console.log(imgUrl);
   }
 
   function handleChange() {
     setChange(!change);
-    console.log(change);
   }
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+
+    try {
+      const user1 = await updateUser({
+        variables: {
+          userId: profileId,
+          username,
+          email,
+          gitHub,
+          img: imgUrl,
+          linkedIn,
+        },
+      });
+      console.log(user1);
+    } catch (err) {
+      console.error(err);
+    }
   };
   if (loading) {
     return <div>Loading...</div>;
@@ -87,7 +100,7 @@ export default function ProfileSetting() {
               <div className="flex flex-col items-center space-y-5 sm:flex-row sm:space-y-0">
                 <img
                   className="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500"
-                  src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZhY2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
+                  src={data.user.img}
                   alt="Bordered avatar"
                 />
 
@@ -113,6 +126,13 @@ export default function ProfileSetting() {
                         onChange={handleImgUrl}
                         required
                       />
+                      <button
+                        type="submit"
+                        className="text-white bg-indigo-700  hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
+                        onClick={handleFormSubmit}
+                      >
+                        Save
+                      </button>
                     </form>
                   ) : (
                     <></>
@@ -187,6 +207,7 @@ export default function ProfileSetting() {
                   <button
                     type="submit"
                     className="text-white bg-indigo-700  hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
+                    onClick={handleFormSubmit}
                   >
                     Save
                   </button>

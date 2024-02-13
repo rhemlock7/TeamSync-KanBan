@@ -5,6 +5,7 @@ const typeDefs = `
     email: String
     gitHub: String
     img: String
+    linkedIn: String
     password: String
     projects: [Project]!
   }

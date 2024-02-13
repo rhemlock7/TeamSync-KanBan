@@ -5,10 +5,28 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().populate('projects');
+      return User.find().populate({
+        path: 'projects',
+        populate: [{
+          path: 'lists',
+          populate: {
+            path: "cards",
+            populate: [{ path: "comments" }, { path: "toDoes" }]
+          }
+        }, { path: 'users' }]
+      });
     },
     user: async (parent, { userId }) => {
-      return User.findOne({ _id: userId }).populate('projects');
+      return User.findOne({ _id: userId }).populate({
+        path: 'projects',
+        populate: [{
+          path: 'lists',
+          populate: {
+            path: "cards",
+            populate: [{ path: "comments" }, { path: "toDoes" }]
+          }
+        }, { path: 'users' }]
+      });
     },
     me: async (parent, args, context) => {
       if (context.user) {
