@@ -26,6 +26,9 @@ const userSchema = new Schema({
   img: {
     type: String
   },
+  linkedIn: {
+    type: String
+  },
   projects: [
     {
       type: Schema.Types.ObjectId,

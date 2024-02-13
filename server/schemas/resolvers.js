@@ -174,10 +174,10 @@ const resolvers = {
       await User.findOneAndUpdate({ _id: userId }, { $pull: { projects: project._id } });
       return project;
     },
-    updateUser: async (parent, { userId, username, email, gitHub, password, img }) => {
+    updateUser: async (parent, { userId, username, email, gitHub, password, img, linkedIn }) => {
       return User.findOneAndUpdate({
         _id: userId
-      }, { username, email, gitHub, password, img }, { new: true })
+      }, { username, email, gitHub, password, img, linkedIn }, { new: true })
     }
   },
 };

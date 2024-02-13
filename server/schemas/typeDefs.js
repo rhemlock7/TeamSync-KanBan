@@ -87,7 +87,7 @@ const typeDefs = `
     updateProject(projectId: ID!, title: String!): Project
     addUserProject(projectId: ID!, userId: ID!): Project
     removeProject(userId: ID!, projectId: ID!): Project
-    updateUser(userId: ID!, username: String, email: String, gitHub: String, password: String, img: String): User
+    updateUser(userId: ID!, username: String, email: String, gitHub: String, password: String, img: String, linkedIn: String): User
   }
 `;
 
