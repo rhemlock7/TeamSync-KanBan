@@ -58,10 +58,3 @@ query getProjectByID($projectId: ID!) {
 
 
 
-export const QUERY_LISTS = gql`
-  
-`;
-
-export const QUERY_CARDS = gql`
-  
-`;
