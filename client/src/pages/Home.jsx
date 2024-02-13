@@ -9,7 +9,7 @@ import { QUERY_ONE_PROJECT } from "../utils/queries";
 
 function Home() {
     const { loading, data } = useQuery(QUERY_ONE_PROJECT, {
-        variables: { projectId: "65ca4844697310a1494d15d0" },
+        // variables: { projectId: "65ca4844697310a1494d15d0" },
     });
 
     if (loading) {

@@ -9,6 +9,7 @@ const people = [
     name: "Mustapha Kromah",
     role: "Co-Founder / CEO",
     imageUrl:"../src/assets/mmk.PNG"
+    
   },
   {
     name: "Mykhalio Zakharkiv",
@@ -36,12 +37,14 @@ export default function About() {
       > 
       {people.map((person) => (
         <li key={person.name}>
+          
           <div className="flex items-center gap-x-6">
             <img
               className="h-24 w-24 rounded-full object-cover"
               src={person.imageUrl}
               alt=""
             />
+            
             <div>
               <h3 className="text-lg font-semibold leading-7 text-gray-900">
                 {person.name}
