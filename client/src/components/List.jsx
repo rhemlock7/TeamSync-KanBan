@@ -58,7 +58,7 @@ function List({ projectId, listId, cards, title }) {
     }
 
     return (
-        <div className="text-white black-bg px-3 py-2 w-72">
+        <div className="text-white darkGray-bg px-3 py-2 w-72">
             <div className='my-3 mb-5'>
                 {showListTitleForm ? (
                     <form onSubmit={UpdateList} className="flex justify-start items-center">

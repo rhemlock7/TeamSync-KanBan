@@ -1,5 +1,6 @@
-import { AntDesignOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar, Tooltip } from 'antd';
+// import { AntDesignOutlined, UserOutlined } from '@ant-design/icons';
+import { Avatar } from 'antd';
+// import { Avatar, Tooltip } from 'antd';
 import { useMutation } from "@apollo/client";
 import { useState } from 'react';
 import { ADD_LIST } from '../utils/mutations'
@@ -25,7 +26,7 @@ function ProjectContainer({ projectId, data, showDrawer }) {
         setTitle(e.target.value)
     }
 
-    console.log(data)
+    // console.log(data)
 
     return (
         <div>

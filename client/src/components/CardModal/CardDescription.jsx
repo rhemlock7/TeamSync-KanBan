@@ -1,38 +1,42 @@
-// import { useState } from 'react';
+import { useState } from 'react';
 import { Input } from 'antd';
+import {
+    CloseCircleTwoTone,
+    CheckCircleTwoTone,
+} from '@ant-design/icons';
 
 const { TextArea } = Input;
 
-// // State
-// const [editText, setEditText] = useState('');
-// const [description, setDescription] = useState('');
 
-// function handleDescription() {
-//     setDescription('New Description')
-// }
 
-function CardDescription({ description }) {
+function CardDescription({ newDescription, description, handleDescription, UpdateCard }) {
 
-    // // State
-    // const [editText, setEditText] = useState('');
-    // const [description, setDescription] = useState(description);
+    // State
+    const [textAreaActive, setTextAreaActive] = useState(false)
 
-    // function handleDescription() {
-    //     setDescription('New Description')
-    // }
-
-    // function handleEditText(e) {
-    //     setEditText(e.target.value);
-    // }
+    function displayTextArea() {
+        setTextAreaActive(!textAreaActive)
+    }
 
     return (
         <section className='my-4'>
             <h3>Description</h3>
-            <p>{description}</p>
-            <TextArea placeholder='No description. Write one here.' rows={3} />
-            {/* {description.length > 0 ? 
-            (<p>{description}</p>) : 
-            (<p onClick={() => handleDescription}>No Description. Click here to write a description.</p>)} */}
+            {textAreaActive ? (
+                <form onSubmit={UpdateCard} >
+                    <TextArea
+                        text={newDescription}
+                        onChange={handleDescription}
+                        rows={1}
+                    />
+                    <div>
+                        <button className="m-0 mr-1 p-0 border-none hover:bg-transparent" onClick={displayTextArea} ><CloseCircleTwoTone twoToneColor="#eb2f96" /></button>
+                        <button className="m-0 p-0 border-none hover:bg-transparent" type="submit"><CheckCircleTwoTone twoToneColor="#52c41a" /></button>
+                    </div>
+                </form>
+                // <div>testing</div>
+            ) : (
+                <p onClick={displayTextArea}>{description}</p>
+            )}
         </section>
     )
 }

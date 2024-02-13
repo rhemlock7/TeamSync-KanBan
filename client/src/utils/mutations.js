@@ -97,8 +97,8 @@ mutation UpdateToDo($toDoId: ID!, $cardId: ID!, $text: String!, $isCompleted: Bo
 `;
 
 export const UPDATE_CARD = gql`
-mutation UpdateCard($cardId: ID!, $description: String!, $title: String!) {
-  updateCard(cardId: $cardId, description: $description, title: $title) {
+mutation UpdateCard($cardId: ID!, $description: String!, $title: String!, $expirationDate: String!) {
+  updateCard(cardId: $cardId, description: $description, title: $title, expirationDate: $expirationDate) {
     title
     listId
     description
