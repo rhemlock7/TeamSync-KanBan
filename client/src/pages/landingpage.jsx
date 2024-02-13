@@ -1,65 +1,25 @@
-import Head from "next/head";
-import Hero from "../components/hero";
-import Navbar from "../components/navbar";
-import SectionTitle from "../components/sectionTitle";
+import React from 'react';
 
-import { benefitOne, benefitTwo } from "../components/data";
-import Video from "../components/video";
-import Benefits from "../components/benefits";
-import Footer from "../components/footer";
-import Testimonials from "../components/testimonials";
-import Cta from "../components/cta";
-import Faq from "../components/faq";
-import PopupWidget from "../components/popupWidget";
-
-const Home = () => {
+function LandingPage() {
   return (
-    <>
-      <Head>
-        <title>Nextly - Free Nextjs & TailwindCSS Landing Page Template</title>
-        <meta
-          name="description"
-          content="Nextly is a free landing page template built with next.js & Tailwind CSS"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <div>
+        {/* Navbar */}
 
-      <Navbar />
-      <Hero />
-      <SectionTitle
-        pretitle="Nextly Benefits"
-        title=" Why should you use this landing page">
-        Nextly is a free landing page & marketing website template for startups
-        and indie projects. Its built with Next.js & TailwindCSS. And its
-        completely open-source.
-      </SectionTitle>
-      <Benefits data={benefitOne} />
-      <Benefits imgPos="right" data={benefitTwo} />
-      <SectionTitle
-        pretitle="Watch a video"
-        title="Learn how to fullfil your needs">
-        This section is to highlight a promo or demo video of your product.
-        Analysts says a landing page with video has 3% more conversion rate. So,
-        don&apos;t forget to add one. Just like this.
-      </SectionTitle>
-      <Video />
-      <SectionTitle
-        pretitle="Testimonials"
-        title="Here's what our customers said">
-        Testimonails is a great way to increase the brand trust and awareness.
-        Use this section to highlight your popular customers.
-      </SectionTitle>
-      <Testimonials />
-      <SectionTitle pretitle="FAQ" title="Frequently Asked Questions">
-        Answer your customers possible questions here, it will increase the
-        conversion rate as well as support or chat requests.
-      </SectionTitle>
-      <Faq />
-      <Cta />
-      <Footer />
-      <PopupWidget />
-    </>
+        {/* Main Content */}
+        <div className="relative overflow-hidden bg-cover bg-no-repeat p-12 text-center bg-gradient-to-r from-purple-600 to-blue-600 h-screen text-white overflow-hidden ">
+          <div className="absolute inset-0">
+            <img src="https://thumbs.dreamstime.com/b/teamwork-team-together-collaboration-business-communication-outd-outdoors-concept-48568990.jpg" alt="Background Image" className="object-cover object-center h-full w-full md:w-block lg:w-block" />
+            <div className="absolute inset-0 bg-black opacity-50"></div>
+          </div>
+          
+          <div className="relative z-10 flex flex-col justify-center items-center h-full text-center">
+            {/* <img className="main-logo" src="/assets/images/TravelMateLogo.png" alt="TravelMate logo" /> */}
+            <h1  className="darkGray-bg text-white hover:bg-gray-500 py-6 px-6 rounded-full text-lg font-bold  transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg">About Team Sync</h1>
+            <p className="text-lg text-gray-300 mt-8 text-white">Sync with Team Sync, Project Mangement made simple.</p>
+          </div>
+        </div>
+      </div>
   );
 }
 
-export default Home;
+export default LandingPage;

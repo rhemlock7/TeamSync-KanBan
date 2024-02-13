@@ -27,12 +27,8 @@ const Login = () => {
   return (
     <section className=" flex flex-col items-center justify-center">
       <div className="text-center mb-10 text-3xl">
-        {/* <img
-          className="mx-auto w-48"
-          src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
-          alt="logo"
-        /> */}
-        <h4 className=" text-xl font-semibold">We are Project 3 Team</h4>
+        
+        <h4 className="mt-20 text-xl font-semibold">TeamSync</h4>
       </div>
 
       <div className="darkGray-bg login-card rounded-lg p-10 max-w-3xl w-full lg:w-4/4 text-gray-700 shadow-xl">

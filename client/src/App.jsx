@@ -37,7 +37,7 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <div className="w-full">
+      {/* <div className="w-full">
 
         <div className='grid-container h-screen'>
           <div className='project-nav darkGray-bg text-white'>
@@ -48,7 +48,9 @@ function App() {
             <Outlet />
           </div>
         </div>
-      </div>
+      </div> */}
+      <NavBar />
+       <Outlet />
     </ApolloProvider>
   );
 }
