@@ -2,12 +2,10 @@ import { useQuery } from "@apollo/client";
 import { useState } from 'react';
 import ProjectContainer from "../components/ProjectContainer";
 import ProjectSideNav from '../components/ProjectSideNav';
-import { Drawer} from 'antd';
+import { Drawer } from 'antd';
 
 
 import { QUERY_ONE_PROJECT } from "../utils/queries";
-
-
 
 function Home() {
     const [openDrawer, setOpenDrawer] = useState(false);
@@ -25,7 +23,7 @@ function Home() {
     });
 
     if (loading) {
-        return (<div>Loading...</div>)
+        return <div>Loading...</div>;
     }
 
     return (
@@ -51,8 +49,7 @@ function Home() {
                 </div>
             </div>
         </div>
-
-    )
+    );
 }
 
 export default Home;
