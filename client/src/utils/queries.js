@@ -79,3 +79,15 @@ query GetCard($cardId: ID!) {
 }
 `;
 
+export const GET_USER = gql`
+query GetUser($userId: ID!) {
+  user(userId: $userId) {
+    _id
+    username
+    email
+    gitHub
+    img
+  }
+}
+`;
+

@@ -1,9 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-
-function Navbar({ isAuthenticated, profileId, imgSrc }) {
+import React from "react";
+import {Link} from "react-router-dom";
+import Auth from "../utils/auth";
+function Navbar({isAuthenticated, profileId, imgSrc}) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
-
   return (
     <nav className="sticky top-0 z-4 w-full py-3 darkGray-bg border-b border-gray-300">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -29,22 +28,25 @@ function Navbar({ isAuthenticated, profileId, imgSrc }) {
                 <Link
                   to="/about"
                   className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-xl font-medium"
+                  // onClick={() => Auth.logout()}
                 >
                   About Us
                 </Link>
-                <Link
-                  to="/Home"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-xl font-medium"
-                >
-                  Dashboard
-                </Link>
-
-               
-                {isAuthenticated ? (
+                {Auth.loggedIn() && (
                   <Link
-                    to="/logout"
+                    to={`/profile/${Auth.getProfile().authenticatedPerson._id}`}
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-xl font-medium"
+                  >
+                    Profile Settings
+                  </Link>
+                )}
+                {/* Conditional rendering based on authentication status */}
+                {Auth.loggedIn() ? (
+                  <Link
+                    to="/"
                     id="logout"
                     className="text-gray-300 bg-green-600 hover:bg-green-500 hover:text-white rounded-md px-3 py-2 text-xl font-medium"
+                    onClick={() => Auth.logout()}
                   >
                     Logout
                   </Link>
@@ -70,7 +72,11 @@ function Navbar({ isAuthenticated, profileId, imgSrc }) {
                     aria-expanded="false"
                     aria-haspopup="true"
                   >
-                    <img className="h-8 w-8 rounded-full bg-gray-600" src={imgSrc} alt="profile-icon" />
+                    <img
+                      className="h-8 w-8 rounded-full bg-gray-600"
+                      src={imgSrc}
+                      alt="profile-icon"
+                    />
                   </button>
                 </Link>
               </div>
