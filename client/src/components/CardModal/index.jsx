@@ -10,14 +10,14 @@ function CardModal({setCardModal, card}) {
     console.log(cardData)
     
     return (
-        <div className="modal-container pb-12">
+        <div className="modal-container pb-12 text-black">
             <div className='modal'>
                 {/* Card Title & 'X' Button */}
                 <div className='flex justify-between items-center'>
                     <h2>{cardData.title}</h2>
                     {/* X button */}
                     <div onClick={() => setCardModal('')} className='modal-header flex justify-end -mt-5'>
-                        <p className='text-7xl cursor-pointer'>&times;</p>
+                        <p className='text-7xl text-black cursor-pointer'>&times;</p>
                     </div>
                 </div>
 
