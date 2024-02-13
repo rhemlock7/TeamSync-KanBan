@@ -22,9 +22,6 @@ function List({ projectId, listId, cards, title }) {
 
     const [AddCard] = useMutation(ADD_CARD, {
         variables: { title: cardTitle, listId: listId, description: CardDescription },
-        onCompleted: (data) => {
-            console.log(data);
-        },
     });
 
     const [RemoveList] = useMutation(REMOVE_LIST, {
@@ -44,13 +41,11 @@ function List({ projectId, listId, cards, title }) {
     function handleSetCardTitle(e) {
         e.preventDefault()
         setCardTitle(e.target.value)
-        console.log(cardTitle)
     }
 
     function handleSetCardDescription(e) {
         e.preventDefault()
         setCardDescription(e.target.value)
-        console.log(CardDescription)
     }
 
     function handleListUpdate() {
@@ -106,7 +101,7 @@ function List({ projectId, listId, cards, title }) {
                     <button className='bg-white border-none text-black hover:bg-white hover:border-none hover:scale-100 hover:text-black' type="submit">Submit</button>
                 </form>
             ) : <></>}
-            <CardPreview cards={cards} />
+            <CardPreview listId={listId} cards={cards} />
             <div className="flex">
                 <div className="cursor-pointer">
                     <Popconfirm

@@ -15,7 +15,6 @@ function CardPreview({ listId, cards }) {
     const [cardModal, setCardModal] = useState("")
 
     const listOfCards = cards.cards
-    console.log(listOfCards)
 
     // Queries
     const getCard = useQuery(GET_SINGLE_CARD, {
@@ -24,12 +23,15 @@ function CardPreview({ listId, cards }) {
 
     // Mutations
     const [RemoveCard] = useMutation(REMOVE_CARD, {
-        variables: { cardId: listOfCards._id, listId: listId },
         refetchQueries: [QUERY_ONE_PROJECT, 'projectId']
     });
 
     if (getCard.loading) {
         return (<></>)
+    }
+
+    function handleRemoveCard(cardId) {
+        RemoveCard({ variables: { cardId: cardId, listId: listId }} )
     }
 
     return (
@@ -47,7 +49,7 @@ function CardPreview({ listId, cards }) {
                                 icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
                                 okText='Delete'
                                 okType='danger'
-                                onConfirm={RemoveCard}
+                                onConfirm={() => handleRemoveCard(card._id)}
                             >
                                 <DeleteTwoTone twoToneColor="#eb2f96"/>
                             </Popconfirm>
