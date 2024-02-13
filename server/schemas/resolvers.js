@@ -135,6 +135,7 @@ const resolvers = {
     },
     removeList: async (parent, { listId, projectId }) => {
       let list = await List.findOneAndDelete({ _id: listId });
+      await Card.deleteMany({ listId: list._id });
       await Project.findOneAndUpdate({ _id: projectId }, { $pull: { lists: list._id } });
       return list;
     },
@@ -171,8 +172,14 @@ const resolvers = {
       let project = Project.findOneAndDelete({
         _id: projectId
       });
+      await List.deleteMany({ projectId: projectId });
       await User.findOneAndUpdate({ _id: userId }, { $pull: { projects: project._id } });
       return project;
+    },
+    updateUser: async (parent, { userId, username, email, gitHub, password, img, linkedIn }) => {
+      return User.findOneAndUpdate({
+        _id: userId
+      }, { username, email, gitHub, password, img, linkedIn }, { new: true })
     }
   },
 };

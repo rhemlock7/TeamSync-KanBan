@@ -3,6 +3,8 @@ const typeDefs = `
     _id: ID
     username: String
     email: String
+    gitHub: String
+    img: String
     password: String
     projects: [Project]!
   }
@@ -11,6 +13,7 @@ const typeDefs = `
     _id: ID
     title: String
     createdAt: String
+    createdBy: String
     users: [User]!
     lists: [List]!
   }
@@ -84,6 +87,7 @@ const typeDefs = `
     updateProject(projectId: ID!, title: String!): Project
     addUserProject(projectId: ID!, userId: ID!): Project
     removeProject(userId: ID!, projectId: ID!): Project
+    updateUser(userId: ID!, username: String, email: String, gitHub: String, password: String, img: String, linkedIn: String): User
   }
 `;
 
