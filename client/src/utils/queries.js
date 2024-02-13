@@ -56,5 +56,26 @@ query getProjectByID($projectId: ID!) {
 }
 `;
 
-
+export const GET_SINGLE_CARD = gql`
+query GetCard($cardId: ID!) {
+  card(cardId: $cardId) {
+    _id
+    title
+    listId
+    description
+    createdAt
+    comments {
+      _id
+      commentText
+      commentAuthor
+      createdAt
+    }
+    toDoes {
+      _id
+      text
+      isCompleted
+    }
+  }
+}
+`;
 
