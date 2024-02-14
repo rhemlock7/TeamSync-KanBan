@@ -23,6 +23,7 @@ function List({ projectId, listId, cards, title }) {
 
     const [AddCard] = useMutation(ADD_CARD, {
         variables: { title: cardTitle, listId: listId, description: CardDescription },
+        refetchQueries: [QUERY_ONE_PROJECT, 'projectId']
     });
 
     const [RemoveList] = useMutation(REMOVE_LIST, {
@@ -62,6 +63,14 @@ function List({ projectId, listId, cards, title }) {
         setDisplayCards(!displayCards)
     }
 
+    function handleAddCard(e) {
+        e.preventDefault()
+        AddCard()
+        setCardTitle('')
+        setCardDescription('')
+        setShowForm(!showForm)
+    }
+
     return (
         <div className="text-white darkGray-bg px-3 py-2 md:w-72 w-80 my-2 h-fit">
             <div className='my-3 mb-5'>
@@ -82,7 +91,7 @@ function List({ projectId, listId, cards, title }) {
                 )}
             </div>
             {showForm ? (
-                <form onSubmit={AddCard}>
+                <form onSubmit={handleAddCard}>
                     <div className='flex flex-col'>
                         <label>Card title?</label>
                         <input

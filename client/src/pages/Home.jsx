@@ -18,7 +18,7 @@ function Home() {
     const onClose = () => {
         setOpenDrawer(false);
     };
-    
+
     const { loading, data } = useQuery(GET_USER, {
         variables: { userId: Auth.getProfile().authenticatedPerson._id },
     });
@@ -31,10 +31,39 @@ function Home() {
     }
 
     if (data.user.projects.length < 1) {
-        return <div>Add new project</div>;
+        return (
+            <div className="">
+                <div className="darkGray-bg text-white">
+                    <Drawer
+                        title="Projects"
+                        placement="left"
+                        closeable="false"
+                        onClose={onClose}
+                        open={openDrawer}
+                    >
+                        <ProjectSideNav projects={data.user} setProject={setProject} />
+                    </Drawer>
+                </div>
+                <div className="">
+                    <div className="gradient-bg px-5 h-screen">
+                        <button
+                            onClick={showDrawer}
+                            className="button-cta border-none text-white drop-shadow-xl ml-2 mt-2"
+                        >
+                            Projects
+                        </button>
+                        <div className="text-black ml-1">
+                            <h1>No projects yet...</h1>
+                            <p className="text-xl">Click the Projects button to create your first project.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        );
     }
 
-    console.log(Auth.getProfile().authenticatedPerson);
+    // console.log(Auth.getProfile().authenticatedPerson);
     return (
         <div className="">
             <div className="darkGray-bg text-white">
@@ -52,7 +81,7 @@ function Home() {
                 <div className="gradient-bg px-5 h-screen">
                     <button
                         onClick={showDrawer}
-                        className="button-cta border-none text-white drop-shadow-xl"
+                        className="button-cta border-none text-white drop-shadow-xl ml-2 mt-2"
                     >
                         Projects
                     </button>

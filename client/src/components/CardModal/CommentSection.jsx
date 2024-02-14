@@ -3,7 +3,7 @@ import { EditOutlined, DeleteOutlined, QuestionCircleOutlined } from '@ant-desig
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_COMMENT, REMOVE_COMMENT } from '../../utils/mutations';
-// import { ADD_COMMENT, REMOVE_COMMENT, UPDATE_COMMENT } from '../../utils/mutations';
+import Auth from '../../utils/auth';
 const { TextArea } = Input;
 
 function CommentSection({ commentsDB }) {
@@ -13,9 +13,11 @@ function CommentSection({ commentsDB }) {
 
     const [commentText, setCommentText] = useState('');
 
+    const projectAuthor = Auth.getProfile().authenticatedPerson.username
+
     // Mutations
     const [AddComment] = useMutation(ADD_COMMENT, {
-        variables: { cardId: commentsDB._id, commentText: commentText, commentAuthor: 'Mustapha' }
+        variables: { cardId: commentsDB._id, commentText: commentText, commentAuthor: projectAuthor }
         // refetchQueries: [QUERY_ONE_PROJECT, 'projectId']
     });
 
@@ -33,10 +35,15 @@ function CommentSection({ commentsDB }) {
         RemoveComment({ variables: { cardId: commentsDB._id, commentId: commentId } })
     }
 
+    function handleAddComment(e) {
+        e.preventDefault();
+        AddComment()
+    }
+
     return (
         <section className='my-4'>
             <h3>Comments</h3>
-            <form onSubmit={AddComment}>
+            <form onSubmit={handleAddComment}>
                 <TextArea
                     placeholder='Add comments here...'
                     rows={2}
