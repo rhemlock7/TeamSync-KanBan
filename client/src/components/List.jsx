@@ -2,12 +2,12 @@ import { useMutation } from "@apollo/client";
 import { useState } from 'react';
 import { ADD_CARD, REMOVE_LIST, UPDATE_LIST } from '../utils/mutations'
 import { QUERY_ONE_PROJECT } from "../utils/queries";
-
 import {
     DeleteFilled,
     CloseCircleTwoTone,
     CheckCircleTwoTone,
-    QuestionCircleOutlined
+    QuestionCircleOutlined,
+    RightCircleOutlined
 } from '@ant-design/icons';
 import { Popconfirm } from 'antd';
 import CardPreview from "./CardPreview";
@@ -19,6 +19,7 @@ function List({ projectId, listId, cards, title }) {
     const [CardDescription, setCardDescription] = useState('')
     const [listTitle, setListTitle] = useState('')
     const [showListTitleForm, setShowListTitleForm] = useState(false)
+    const [displayCards, setDisplayCards] = useState(true)
 
     const [AddCard] = useMutation(ADD_CARD, {
         variables: { title: cardTitle, listId: listId, description: CardDescription },
@@ -57,8 +58,12 @@ function List({ projectId, listId, cards, title }) {
         setListTitle(e.target.value)
     }
 
+    function handleDisplayCards() {
+        setDisplayCards(!displayCards)
+    }
+
     return (
-        <div className="text-white darkGray-bg px-3 py-2 w-72">
+        <div className="text-white darkGray-bg px-3 py-2 md:w-72 w-80 my-2 h-fit">
             <div className='my-3 mb-5'>
                 {showListTitleForm ? (
                     <form onSubmit={UpdateList} className="flex justify-start items-center">
@@ -70,7 +75,7 @@ function List({ projectId, listId, cards, title }) {
                     </form>
                 ) : (
                     <div className='flex justify-between items-center -mt-1 w-full'>
-                        <h3 onClick={handleListUpdate}>{title}</h3>
+                        <h3 className="cursor-pointer" onClick={handleListUpdate}>{title}</h3>
                         <button onClick={handleShowForm} className='button-cta'>New Card</button>
                     </div>
 
@@ -101,7 +106,12 @@ function List({ projectId, listId, cards, title }) {
                     <button className='bg-white border-none text-black hover:bg-white hover:border-none hover:scale-100 hover:text-black' type="submit">Submit</button>
                 </form>
             ) : <></>}
-            <CardPreview listId={listId} cards={cards} />
+            <div className="cursor-pointer">
+                {displayCards ? (
+                    <CardPreview listId={listId} cards={cards} />
+                ) : <></>}
+            </div>
+
             <div className="flex">
                 <div className="cursor-pointer">
                     <Popconfirm
@@ -114,6 +124,9 @@ function List({ projectId, listId, cards, title }) {
                     >
                         <DeleteFilled />
                     </Popconfirm>
+                </div>
+                <div onClick={handleDisplayCards} className="cursor-pointer ml-1">
+                    <RightCircleOutlined />
                 </div>
             </div>
         </div>
