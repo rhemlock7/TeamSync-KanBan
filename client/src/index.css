@@ -23,7 +23,7 @@ h1 {
     line-height: 1em;
     font-weight: 800;
     font-size: 3em;
-    margin: 20px 0px;
+    margin: 10px 0px;
 
 }
 
@@ -140,9 +140,180 @@ button:hover {
 
 .login-btn {
     color: rgb(24, 15, 196);
-}
+} 
 
 .input-border {
     border: 1px solid black;
     border-radius: 4px;
 }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --accent: #00A8E8;
+    --black: #000f13;
+    --darkGray: #02233b;
+    --lightGray: #007EA7;
+    --offWhite: #ededed;
+    --white: #FFFFFF;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "greycliff-cf", sans-serif;
+}
+
+h1 {
+    font-variation-settings: "ital" 0, "wdth" 100, "wght" 800;
+    font-weight: 800;
+    font-size: 3em;
+    
+}
+
+h2 {
+    font-family: "greycliff-cf", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2em;
+}
+
+h3 {
+    font-family: "greycliff-cf", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 1.25em;
+}
+
+p {
+    font-family: "greycliff-cf", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+button {
+    border: 1px solid var(--black);
+    border-radius: 4px;
+    padding: 3px 30px;
+    margin-top: 5px;
+    transition: all 200ms ease;
+}
+
+button:hover {
+    color: var(--white);
+    background-color: var(--black);
+    transform: scale(1.025);
+}
+
+/* Background Color Classes */
+.black-bg {
+    background-color: var(--black);
+}
+
+.darkGray-bg {
+    background-color: var(--darkGray);
+}
+
+.lightGray-bg {
+    background-color: var(--lightGray);
+}
+
+.offWhite-bg {
+    background-color: var(--offWhite);
+}
+
+.white-bg {
+    background-color: var(--white);
+}
+
+.gradient-bg {
+    background: rgb(185, 185, 185);
+    background: linear-gradient(338deg, rgba(185, 185, 185, 1) 0%, rgba(230, 230, 230, 1) 43%, rgba(238, 238, 238, 1) 100%);
+}
+
+/* Main Grid */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.project-nav {
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+.grid-outlet {
+    grid-area: 1 / 2 / 2 / 9;
+}
+
+/* Styles by class */
+.button-cta {
+    background-color: var(--accent);
+    padding: 4px 15px;
+    border-radius: 4px;
+    transition: all 200ms ease;
+}
+
+.button-cta:hover {
+    transform: scale(1.025);
+    background-color: var(--accent);
+}
+
+.new-list-bttn {
+    background-color: var(--darkGray);
+    color: var(--white);
+    padding: 8px 50px;
+    border-radius: 6px;
+    transition: all 200ms ease;
+}
+
+.new-list-bttn:hover {
+    transform: scale(1.025);
+    background-color: var(--darkGray);
+}
+.login-card {
+  /* Resting shadow with multiple colors */
+  box-shadow: 0px 8px 16px ,
+    10px 22px 32px rgb(0, 168, 232);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  border-radius: 10px;
+}
+.login-btn{
+
+  color: rgb(24, 15, 196);
+}
+.gradient-background {
+    background-image: linear-gradient(to bottom right,#003459, #000f13, #007EA7,#02233b);
+}
+.navbar{
+    background-image: linear-gradient(to bottom right, #000f13,#02233b);
+}
+.btn{
+
+    background-image: linear-gradient(to bottom right, #000f13,#02233b);
+}
+.btn:hover{
+    background-color: white ;
+}
+  
+.image-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .image-container img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  
+  .cards {
+   background-image: linear-gradient(to bottom right,#003459, #000f13, #007EA7,#02233b);
+
+  }
+  
+  

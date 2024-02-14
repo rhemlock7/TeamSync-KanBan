@@ -41,15 +41,10 @@ const Signup = () => {
   return (
     <section className="flex flex-col items-center justify-center">
       <div className="text-center mb-10 text-3xl">
-        {/* <img
-          className="mx-auto w-48"
-          src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
-          alt="logo"
-        /> */}
-        <h4 className="mt-4 text-xl font-semibold">We are Project 3 Team</h4>
+      <img  src="src/assets/logoo.png" alt="TeamSync logo" width="200" height="200" />
       </div>
 
-      <div className="darkGray-bg login-card rounded-lg p-10 max-w-3xl w-full lg:w-4/4 text-gray-700 shadow-xl">
+      <div className="cards login-card mb-20 rounded-lg p-10 max-w-3xl w-full lg:w-4/4 text-gray-700 shadow-xl">
         <h2 className="text-center text-white text-lg font-bold mb-6">Sign Up</h2>
 
         {data ? (
@@ -134,7 +129,7 @@ const Signup = () => {
 
       
         <p className="mt-4 text-center text-lg text-white ">
-          Already a member? <Link to="/login" className="font-semibold leading-6 text-white hover:text-gray0">Log in</Link>
+          Already a member? <Link to="/login" className="font-bold leading-6 text-gray-300 hover:text-white">Log in</Link>
         </p>
       </div>
     </section>

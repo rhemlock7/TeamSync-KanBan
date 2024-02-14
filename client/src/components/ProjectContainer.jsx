@@ -3,9 +3,9 @@ import {useMutation, useQuery} from "@apollo/client";
 import {useState} from "react";
 import {ADD_LIST} from "../utils/mutations";
 import List from "./List";
-// import Profile from "./Profile";
-import {GET_ALL_USERS, QUERY_ONE_PROJECT} from "../utils/queries";
 import DropDown from "./Dropdown";
+// import Profile from "./Profile";
+import {QUERY_ONE_PROJECT} from "../utils/queries";
 function ProjectContainer({projectId}) {
   const [title, setTitle] = useState("");
   const [showInput, setShowInput] = useState(false);
@@ -14,16 +14,17 @@ function ProjectContainer({projectId}) {
   // console.log(projectId);
   const [AddList] = useMutation(ADD_LIST, {
     variables: {title: title, projectId: projectId},
+    refetchQueries: [QUERY_ONE_PROJECT, "projectId"],
   });
   const {loading, data} = useQuery(QUERY_ONE_PROJECT, {
     variables: {projectId: projectId},
   });
-
   if (loading) {
     return <div>loading</div>;
   }
-  // console.log(usersData.data.users);
+  // console.log(data);
   const users = data.projectId.users;
+  // console.log('Users', users)
   const lists = data.projectId?.lists || [];
 
   function handleShowInput() {
@@ -32,6 +33,13 @@ function ProjectContainer({projectId}) {
 
   function handleSetTitle(e) {
     setTitle(e.target.value);
+  }
+
+  function handleAddList(e) {
+    e.preventDefault();
+    AddList();
+    setTitle("");
+    setShowInput(!showInput);
   }
 
   return (
@@ -72,7 +80,7 @@ function ProjectContainer({projectId}) {
               Create a new list
             </button>
             {showInput ? (
-              <form onSubmit={AddList} className="flex flex-col mt-2">
+              <form onSubmit={handleAddList} className="flex flex-col mt-2">
                 <label>What is your List name?</label>
                 <input
                   type="text"
