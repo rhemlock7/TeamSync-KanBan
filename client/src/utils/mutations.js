@@ -41,7 +41,6 @@ mutation AddList($title: String!, $projectId: ID!) {
     projectId
   }
 }
-}
 `;
 
 export const ADD_CARD = gql`
@@ -98,8 +97,8 @@ mutation UpdateToDo($toDoId: ID!, $cardId: ID!, $text: String!, $isCompleted: Bo
 `;
 
 export const UPDATE_CARD = gql`
-mutation UpdateCard($cardId: ID!, $description: String!, $title: String!) {
-  updateCard(cardId: $cardId, description: $description, title: $title) {
+mutation UpdateCard($cardId: ID!, $description: String!, $title: String!, $expirationDate: String!) {
+  updateCard(cardId: $cardId, description: $description, title: $title, expirationDate: $expirationDate) {
     title
     listId
     description
@@ -164,6 +163,52 @@ mutation RemoveToDo($cardId: ID!, $toDoId: ID!) {
     }
     _id
     title
+  }
+}
+`;
+
+export const REMOVE_LIST = gql`
+mutation RemoveList($listId: ID!, $projectId: ID!) {
+  removeList(listId: $listId, projectId: $projectId) {
+    _id
+    title
+    projectId
+  }
+}
+`;
+
+export const REMOVE_CARD = gql`
+mutation RemoveCard($cardId: ID!, $listId: ID!) {
+  removeCard(cardId: $cardId, listId: $listId) {
+    _id
+    title
+    description
+    listId
+  }
+}
+`;
+
+export const ADD_USER_PROJECT = gql`
+mutation AddUserProject($projectId: ID!, $userId: ID!) {
+  addUserProject(projectId: $projectId, userId: $userId) {
+    title
+    users {
+      _id
+      username
+    }
+    _id
+  }
+}
+`;
+
+export const UPDATE_USER = gql`
+mutation UpdateUser($userId: ID!, $username: String, $email: String, $gitHub: String, $password: String, $img: String) {
+  updateUser(userId: $userId, username: $username, email: $email, gitHub: $gitHub, password: $password, img: $img) {
+    _id
+    username
+    gitHub
+    email
+    img
   }
 }
 `;

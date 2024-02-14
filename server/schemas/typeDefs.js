@@ -3,6 +3,8 @@ const typeDefs = `
     _id: ID
     username: String
     email: String
+    gitHub: String
+    img: String
     password: String
     projects: [Project]!
   }
@@ -11,6 +13,7 @@ const typeDefs = `
     _id: ID
     title: String
     createdAt: String
+    createdBy: String
     users: [User]!
     lists: [List]!
   }
@@ -52,7 +55,7 @@ const typeDefs = `
 
   type Query {
     users: [User]
-    user(username: String!): User
+    user(userId: ID!): User
     me: User
     projects: [Project]
     projectId(projectId: ID!): Project
@@ -79,11 +82,12 @@ const typeDefs = `
     removeCard(cardId: ID!, listId: ID!): Card
     removeList(listId: ID!, projectId: ID!): List
     updateToDo(toDoId: ID!, cardId: ID!, text: String!, isCompleted: Boolean!): Card
-    updateCard(cardId: ID!, description: String!, title: String!): Card
+    updateCard(cardId: ID!, description: String, title: String, expirationDate: String): Card
     updateList(listId: ID!, title: String!): List
     updateProject(projectId: ID!, title: String!): Project
     addUserProject(projectId: ID!, userId: ID!): Project
     removeProject(userId: ID!, projectId: ID!): Project
+    updateUser(userId: ID!, username: String, email: String, gitHub: String, password: String, img: String, linkedIn: String): User
   }
 `;
 

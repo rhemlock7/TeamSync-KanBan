@@ -7,8 +7,8 @@ const resolvers = {
     users: async () => {
       return User.find().populate('projects');
     },
-    user: async (parent, { username }) => {
-      return User.findOne({ username }).populate('projects');
+    user: async (parent, { userId }) => {
+      return User.findOne({ _id: userId }).populate('projects');
     },
     me: async (parent, args, context) => {
       if (context.user) {
@@ -135,6 +135,7 @@ const resolvers = {
     },
     removeList: async (parent, { listId, projectId }) => {
       let list = await List.findOneAndDelete({ _id: listId });
+      await Card.deleteMany({ listId: list._id });
       await Project.findOneAndUpdate({ _id: projectId }, { $pull: { lists: list._id } });
       return list;
     },
@@ -147,10 +148,10 @@ const resolvers = {
         { new: true })
       return card;
     },
-    updateCard: async (parent, { cardId, description, title }) => {
+    updateCard: async (parent, { cardId, description, title, expirationDate }) => {
       return Card.findOneAndUpdate({
         _id: cardId
-      }, { description, title }, { new: true })
+      }, { description, title, expirationDate }, { new: true })
     },
     updateList: async (parent, { listId, title }) => {
       return List.findOneAndUpdate({
@@ -171,8 +172,14 @@ const resolvers = {
       let project = Project.findOneAndDelete({
         _id: projectId
       });
+      await List.deleteMany({ projectId: projectId });
       await User.findOneAndUpdate({ _id: userId }, { $pull: { projects: project._id } });
       return project;
+    },
+    updateUser: async (parent, { userId, username, email, gitHub, password, img, linkedIn }) => {
+      return User.findOneAndUpdate({
+        _id: userId
+      }, { username, email, gitHub, password, img, linkedIn }, { new: true })
     }
   },
 };
