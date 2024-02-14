@@ -1,15 +1,29 @@
 import { useState } from 'react';
+// import { ADD_TODO, REMOVE_TODO, UPDATE_TODO } from '../../utils/mutations';
+// import { useMutation } from '@apollo/client';
 import { Checkbox, Progress } from 'antd';
 import { CheckCircleTwoTone, DeleteTwoTone, EditOutlined } from '@ant-design/icons';
 
-function ToDoList() {
+function ToDoList({ todosDB }) {
+
+    // State
     const [todos, setTodos] = useState([]);
     const [editingIndex, setEditingIndex] = useState(null);
     const [editText, setEditText] = useState('');
 
+    // useMutations
+    // const [AddToDo] = useMutation(ADD_TODO, {
+    //     variables: { cardId: todosDB._id, text: },
+    //     // refetchQueries: [QUERY_ONE_PROJECT, 'projectId']
+    // });
+
+
+    // Helper functions
     function addTodo() {
         const newArr = [...todos, { text: '', isCompleted: false }];
         setTodos(newArr);
+        // TODO: Work on pushing the entire array back up to the DB.
+        // AddToDo({variables: {cardId: todosDB._id, text:}})
         setEditingIndex(newArr.length - 1);
     }
 
@@ -42,7 +56,6 @@ function ToDoList() {
         setEditText('')
     }
 
-    // Testing
     function todoProgress() {
         if (todos.length === 0) {
             return 0;
@@ -51,12 +64,16 @@ function ToDoList() {
         return Math.round((checkedCount / todos.length) * 100);
     }
 
+    // To-do props
+    const listOfToDos = todosDB.toDoes
+    // console.log('TODOs', listOfToDos)
+
     return (
         <section className='my-4'>
             <h3>ToDo List</h3>
             <Progress percent={todoProgress()} />
             <div>
-                {todos.map((todo, index) => (
+                {listOfToDos.map((todo, index) => (
                     <div key={index}>
                         {editingIndex === index ? (
                             <>
@@ -66,7 +83,7 @@ function ToDoList() {
                                     onChange={handleEditText}
                                     placeholder='todo?'
                                 />
-                                <CheckCircleTwoTone onClick={() => saveEditedTodo(index)} twoToneColor="#52c41a"/>
+                                <CheckCircleTwoTone onClick={() => saveEditedTodo(index)} twoToneColor="#52c41a" />
                                 <DeleteTwoTone onClick={() => deleteTodo(index)} twoToneColor="#eb2f96" />
                             </>
                         ) : (

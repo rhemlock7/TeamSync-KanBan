@@ -1,12 +1,25 @@
+import { useQuery } from "@apollo/client";
+// import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { QUERY_PROJECTS } from "../utils/queries";
 
 function ProjectSideNav() {
+
+    const { loading, data } = useQuery(QUERY_PROJECTS, {});
+
+    if (loading) {
+        return <div>Loading...</div>
+    }
+
+    const projects = data.projects
+
+    console.log(data.projects)
+
     return (
-        <div className="px-5 pt-4">
-            <ul className="my-5">
-                <li>Project Name</li>
-                <li>Project Name</li>
-                <li>Project Name</li>
-            </ul>
+        <div className="px-5 pt-4 flex flex-col">
+            {projects.map(project => (
+                <Link key={project._id}>{project.title}</Link>
+            ))}
         </div>
     )
 }

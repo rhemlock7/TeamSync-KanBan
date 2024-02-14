@@ -1,20 +1,20 @@
-import {AntDesignOutlined, UserOutlined} from "@ant-design/icons";
-import {Avatar, Tooltip} from "antd";
+import {Avatar} from "antd";
 import {useMutation} from "@apollo/client";
 import {useState} from "react";
 import {ADD_LIST} from "../utils/mutations";
 import List from "./List";
-// import { AntDesignOutlined, UserOutlined } from '@ant-design/icons';
 
-function ProjectContainer({projectId, data}) {
+function ProjectContainer({projectId, data, showDrawer}) {
   const [title, setTitle] = useState("");
   const [showInput, setShowInput] = useState(false);
-  console.log(data.users);
+
+  // console.log('Data', data)
+  const users = data.projectId.users;
+  // console.log('Users', users)
+  const lists = data.projectId?.lists || [];
+
   const [AddList] = useMutation(ADD_LIST, {
     variables: {title: title, projectId: projectId},
-    onCompleted: (data) => {
-      console.log(data);
-    },
   });
 
   function handleShowInput() {
@@ -25,33 +25,31 @@ function ProjectContainer({projectId, data}) {
     setTitle(e.target.value);
   }
 
-  const lists = data.lists || [];
-
   return (
     <div>
-      <div className="flex justify-start items-center">
-        <h1>{data.title}</h1>
-        <div className="ml-5 mt-2">
-          <Avatar.Group
-            maxCount={2}
-            maxStyle={{color: "#f56a00", backgroundColor: "#fde3cf"}}
+      <div className="flex flex-col">
+        <h1>{data.projectId.title}</h1>
+        <div className="flex justify-start items-center mb-5">
+          <button
+            onClick={showDrawer}
+            className="button-cta border-none text-white drop-shadow-xl"
           >
-            {data.users.map((user) => (
-              <Avatar src={user.img} />
-            ))}
-            {/* <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=2" />
-            <Avatar style={{backgroundColor: "#f56a00"}}>K</Avatar>
-            <Tooltip title="Ant User" placement="top">
-              <Avatar
-                style={{backgroundColor: "#87d068"}}
-                icon={<UserOutlined />}
-              />
-            </Tooltip>
-            <Avatar
-              style={{backgroundColor: "#1677ff"}}
-              icon={<AntDesignOutlined />}
-            /> */}
-          </Avatar.Group>
+            Projects
+          </button>
+          <button className="ml-2">Invite Users</button>
+          <div className="ml-2 mt-1">
+            <Avatar.Group
+              maxCount={2}
+              maxStyle={{color: "#f56a00", backgroundColor: "#fde3cf"}}
+            >
+              {/* <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=2" /> */}
+              {users.map((user) => (
+                <Avatar key={user._id} style={{backgroundColor: "#f56a00"}}>
+                  {user.username.charAt(0).toUpperCase()}
+                </Avatar>
+              ))}
+            </Avatar.Group>
+          </div>
         </div>
       </div>
       <div className="grid grid-flow-col auto-cols-max gap-x-3">

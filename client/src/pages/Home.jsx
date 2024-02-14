@@ -9,6 +9,7 @@ import {GET_USER, QUERY_ONE_PROJECT} from "../utils/queries";
 
 function Home() {
   const [openDrawer, setOpenDrawer] = useState(false);
+  // const [activeProject, setActiveProject] = useState('')
 
   const showDrawer = () => {
     setOpenDrawer(true);
@@ -18,13 +19,13 @@ function Home() {
     setOpenDrawer(false);
   };
 
-  const {loading, data} = useQuery(GET_USER, {
-    variables: {userId: Auth.getProfile().authenticatedPerson._id},
-  });
+  // const {loading, data} = useQuery(GET_USER, {
+  //   variables: {userId: Auth.getProfile().authenticatedPerson._id},
+  // });
 
-  //   const {loading, data} = useQuery(QUERY_ONE_PROJECT, {
-  //     variables: {projectId: "65cbc6dc8d1a3f185aa77c99"},
-  //   });
+  const {loading, data} = useQuery(QUERY_ONE_PROJECT, {
+    variables: {projectId: "65cbc6dc8d1a3f185aa77c99"},
+  });
 
   if (loading) {
     return <div>Loading...</div>;

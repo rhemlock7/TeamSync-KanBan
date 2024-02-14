@@ -21,7 +21,7 @@ function CardModal({ setCardModal, card }) {
     console.log(cardData);
 
     const [UpdateCard] = useMutation(UPDATE_CARD, {
-        variables: { cardId: cardData._id, description: newDescription.length > 0 ? newDescription : cardData.description, title: modalTitle.length > 0 ? modalTitle : cardData.title, expirationDate: '2024-02-15' },
+        variables: { cardId: cardData._id, description: newDescription.length > 0 ? newDescription : cardData.description, title: modalTitle.length > 0 ? modalTitle : cardData.title, expirationDate: '2024-02-18' },
         refetchQueries: [QUERY_ONE_PROJECT, 'projectId']
     });
 
@@ -81,10 +81,10 @@ function CardModal({ setCardModal, card }) {
                 <CardDescription UpdateCard={UpdateCard} newDescription={newDescription} handleDescription={handleDescription} description={cardData.description} />
 
                 {/* ToDo List */}
-                <ToDoList todos={cardData.todoes} />
+                <ToDoList todosDB={cardData} />
 
                 {/* Comment Sections */}
-                <CommentSection comments={cardData.comments} />
+                <CommentSection commentsDB={cardData} />
             </div>
         </div>
     )
