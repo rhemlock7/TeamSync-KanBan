@@ -20,9 +20,11 @@
 
 h1 {
     font-variation-settings: "ital" 0, "wdth" 100, "wght" 800;
+    line-height: 1em;
     font-weight: 800;
     font-size: 3em;
-    
+    margin: 20px 0px;
+
 }
 
 h2 {
@@ -127,6 +129,7 @@ button:hover {
     transform: scale(1.025);
     background-color: var(--darkGray);
 }
+
 .login-card {
   /* Resting shadow with multiple colors */
   box-shadow: 0px 8px 16px ,
@@ -134,38 +137,7 @@ button:hover {
   transition: box-shadow 0.3s ease, transform 0.3s ease;
   border-radius: 10px;
 }
-.login-btn{
 
-  color: rgb(24, 15, 196);
+.login-btn {
+    color: rgb(24, 15, 196);
 }
-.gradient-background {
-    background-image: linear-gradient(to bottom right,#003459, #000f13, #007EA7,#02233b);
-}
-.navbar{
-    background-image: linear-gradient(to bottom right, #000f13,#02233b);
-}
-.btn{
-
-    background-image: linear-gradient(to bottom right, #000f13,#02233b);
-}
-.btn:hover{
-    background-color: white ;
-}
-  
-.image-container {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .image-container img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-  
-  .cards {
-   background-image: linear-gradient(to bottom right,#003459, #000f13, #007EA7,#02233b);
-
-  }
-  
-  
