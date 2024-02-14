@@ -28,7 +28,7 @@ function ProjectContainer({ projectId, data, showDrawer }) {
     }
 
     return (
-        <div>
+        <div className='pb-6 md:pb-0 mb-0'>
             <div className='flex flex-col'>
                 <h1>{data.projectId.title}</h1>
                 <div className='flex justify-start items-center mb-5'>
@@ -46,33 +46,35 @@ function ProjectContainer({ projectId, data, showDrawer }) {
                     </div>
                 </div>
             </div>
-            <div className="grid grid-flow-col auto-cols-max gap-x-3">
-                {lists.map((list) => (
-                    < List
-                        title={list.title}
-                        cards={list}
-                        key={list._id}
-                        listId={list._id}
-                        projectId={projectId}
-                    />
-                ))}
-                <div className='flex flex-col'>
-                    <button onClick={handleShowInput} className='new-list-bttn'>Create a new list</button>
-                    {showInput ? (
-                        <form onSubmit={AddList} className='flex flex-col mt-2'>
-                            <label>What is your List name?</label>
-                            <input
-                                type='text'
-                                placeholder='list name'
-                                id='list-input'
-                                className='p-1'
-                                value={title}
-                                onChange={handleSetTitle}
-                            />
-                            <button type='submit'>Submit</button>
-                        </form>
+            <div className='md:overflow-x-auto'>
+                <div className="grid grid-flow-row lg:grid-flow-col auto-cols-max gap-x-3">
+                    {lists.map((list) => (
+                        < List
+                            title={list.title}
+                            cards={list}
+                            key={list._id}
+                            listId={list._id}
+                            projectId={projectId}
+                        />
+                    ))}
+                    <div className='flex flex-col'>
+                        <button onClick={handleShowInput} className='new-list-bttn'>Create a new list</button>
+                        {showInput ? (
+                            <form onSubmit={AddList} className='flex flex-col mt-2'>
+                                <label>What is your List name?</label>
+                                <input
+                                    type='text'
+                                    placeholder='list name'
+                                    id='list-input'
+                                    className='p-1'
+                                    value={title}
+                                    onChange={handleSetTitle}
+                                />
+                                <button type='submit'>Submit</button>
+                            </form>
 
-                    ) : <></>}
+                        ) : <></>}
+                    </div>
                 </div>
             </div>
         </div>

@@ -20,12 +20,14 @@ function Home() {
     };
 
     const { loading, data } = useQuery(QUERY_ONE_PROJECT, {
-        variables: { projectId: "65cb5f0c8e9ab81f6a0e7b91" },
+        variables: { projectId: "65ca4844697310a1494d15d0" },
     });
 
     if (loading) {
         return <div>Loading...</div>
     }
+
+    console.log(data)
 
     return (
         <div className=''>
