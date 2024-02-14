@@ -135,3 +135,11 @@ query GetUser($userId: ID!) {
 }
 `;
 
+export const GET_ALL_USERS = gql`
+query GetUsers {
+  users {
+    _id
+    username
+  }
+}
+`
