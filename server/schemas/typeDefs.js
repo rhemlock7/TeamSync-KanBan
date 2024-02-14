@@ -29,6 +29,13 @@ const typeDefs = `
     description: String
     createdAt: String
     comments: [Comment]!
+    toDoes: [ToDo]!
+  }
+
+  type ToDo {
+    _id: ID
+    text: String
+    isCompleted: Boolean
   }
 
   type Comment {
@@ -48,7 +55,8 @@ const typeDefs = `
     user(username: String!): User
     me: User
     projects: [Project]
-    project(username: String!): Project
+    projectId(projectId: ID!): Project
+    card(cardId: ID!): Card
   }
 
   type Mutation {
@@ -57,6 +65,25 @@ const typeDefs = `
     addProject(title: String!, projectAuthor: String!, authId: ID!): Project
     addList(title: String!, projectId: ID!): List
     addCard(title: String!, listId: ID!, description: String!): Card
+    addComment(
+      cardId: ID!
+      commentText: String!
+      commentAuthor: String!
+    ): Card
+    removeComment(cardId: ID!, commentId: ID!): Card
+    addToDo(
+      cardId: ID!
+      text: String!
+    ): Card
+    removeToDo(cardId: ID!, toDoId: ID!): Card
+    removeCard(cardId: ID!, listId: ID!): Card
+    removeList(listId: ID!, projectId: ID!): List
+    updateToDo(toDoId: ID!, cardId: ID!, text: String!, isCompleted: Boolean!): Card
+    updateCard(cardId: ID!, description: String!, title: String!): Card
+    updateList(listId: ID!, title: String!): List
+    updateProject(projectId: ID!, title: String!): Project
+    addUserProject(projectId: ID!, userId: ID!): Project
+    removeProject(userId: ID!, projectId: ID!): Project
   }
 `;
 
