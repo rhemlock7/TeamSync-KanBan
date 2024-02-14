@@ -1,30 +1,56 @@
-import {useQuery} from "@apollo/client";
+import { useQuery } from "@apollo/client";
+import { useState } from 'react';
 import ProjectContainer from "../components/ProjectContainer";
-import ProjectSideNav from "../components/ProjectSideNav";
+import ProjectSideNav from '../components/ProjectSideNav';
+import { Drawer } from 'antd';
 
-import {QUERY_ONE_PROJECT} from "../utils/queries";
+
+import { QUERY_ONE_PROJECT } from "../utils/queries";
 
 function Home() {
-  const {loading, data} = useQuery(QUERY_ONE_PROJECT, {
-    variables: {projectId: "65cbb0a0631cc7da51003c33"},
-  });
+    const [openDrawer, setOpenDrawer] = useState(false);
+    // const [activeProject, setActiveProject] = useState('')
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+    const showDrawer = () => {
+        setOpenDrawer(true);
+    };
 
-  return (
-    <div className="grid-container h-screen">
-      <div className="project-nav darkGray-bg text-white">
-        <ProjectSideNav />
-      </div>
-      <div className="grid-outlet">
-        <div className="gradient-bg px-5 h-screen">
-          <ProjectContainer data={data} projectId={data.projectId._id} />
+    const onClose = () => {
+        setOpenDrawer(false);
+    };
+
+    const { loading, data } = useQuery(QUERY_ONE_PROJECT, {
+        variables: { projectId: "65cb5f0c8e9ab81f6a0e7b91" },
+    });
+
+    if (loading) {
+        return <div>Loading...</div>
+    }
+
+    return (
+        <div className=''>
+            <div className='darkGray-bg text-white'>
+                <Drawer
+                    title='Projects'
+                    placement="left"
+                    closeable='false'
+                    onClose={onClose}
+                    open={openDrawer}
+                >
+                    <ProjectSideNav />
+                </Drawer>
+            </div>
+            <div className=''>
+                <div className="gradient-bg px-5 h-screen">
+                    <ProjectContainer
+                        data={data}
+                        projectId={data.projectId._id}
+                        showDrawer={showDrawer}
+                    />
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default Home;
