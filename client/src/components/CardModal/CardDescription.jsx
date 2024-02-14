@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { Input } from 'antd';
 import {
     CloseCircleTwoTone,
@@ -9,10 +9,8 @@ const { TextArea } = Input;
 
 
 
-function CardDescription({ newDescription, description, handleDescription, UpdateCard }) {
+function CardDescription({ newDescription, description, handleDescription, UpdateCard, textAreaActive, setTextAreaActive }) {
 
-    // State
-    const [textAreaActive, setTextAreaActive] = useState(false)
 
     function displayTextArea() {
         setTextAreaActive(!textAreaActive)

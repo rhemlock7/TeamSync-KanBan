@@ -13,6 +13,7 @@ function ProjectContainer({ projectId }) {
     // console.log(projectId);
     const [AddList] = useMutation(ADD_LIST, {
         variables: { title: title, projectId: projectId },
+        refetchQueries: [QUERY_ONE_PROJECT, 'projectId']
     });
     const { loading, data } = useQuery(QUERY_ONE_PROJECT, {
         variables: { projectId: projectId },
@@ -20,7 +21,7 @@ function ProjectContainer({ projectId }) {
     if (loading) {
         return <div>loading</div>;
     }
-    console.log(data);
+    // console.log(data);
     const users = data.projectId.users;
     // console.log('Users', users)
     const lists = data.projectId?.lists || [];
@@ -31,6 +32,13 @@ function ProjectContainer({ projectId }) {
 
     function handleSetTitle(e) {
         setTitle(e.target.value);
+    }
+
+    function handleAddList(e) {
+        e.preventDefault()
+        AddList()
+        setTitle('');
+        setShowInput(!showInput)
     }
 
     return (
@@ -66,7 +74,7 @@ function ProjectContainer({ projectId }) {
                     <div className='flex flex-col'>
                         <button onClick={handleShowInput} className='new-list-bttn'>Create a new list</button>
                         {showInput ? (
-                            <form onSubmit={AddList} className='flex flex-col mt-2'>
+                            <form onSubmit={handleAddList} className='flex flex-col mt-2'>
                                 <label>What is your List name?</label>
                                 <input
                                     type='text'

@@ -5,7 +5,7 @@ import {
 } from '@ant-design/icons';
 import CardDescription from './CardDescription';
 import CommentSection from './CommentSection';
-import MembersDate from './MembersDate';
+// import MembersDate from './MembersDate';
 import ToDoList from './ToDoList';
 import { useMutation } from '@apollo/client';
 import { QUERY_ONE_PROJECT } from '../../utils/queries';
@@ -17,6 +17,7 @@ function CardModal({ setCardModal, card }) {
     const [modalTitle, setModalTitle] = useState('');
     const [showTitleForm, setShowTitleForm] = useState(false);
     const [newDescription, setNewDescription] = useState('');
+    const [textAreaActive, setTextAreaActive] = useState(false)
     const cardData = card.data.card;
     console.log(cardData);
 
@@ -40,10 +41,18 @@ function CardModal({ setCardModal, card }) {
         
     }
 
-    function handleUpdateCard() {
-        console.log('handling description')
+    function handleUpdateDescription(e) {
+        e.preventDefault()
         UpdateCard();
-        setNewDescription(cardData.description)
+        setNewDescription('')
+        setTextAreaActive(!textAreaActive)
+    }
+
+    function handleUpdateTitle(e) {
+        e.preventDefault();
+        UpdateCard();
+        setModalTitle('');
+        setShowTitleForm(!showTitleForm)
     }
 
 
@@ -53,7 +62,7 @@ function CardModal({ setCardModal, card }) {
                 {/* Card Title & 'X' Button */}
                 <div className='flex justify-between items-center'>
                     {showTitleForm ? (
-                        <form onSubmit={handleUpdateCard} className="flex justify-start items-center">
+                        <form onSubmit={handleUpdateTitle} className="flex justify-start items-center">
                             <input
                                 className="p-1 text-black border-black"
                                 placeholder="New List Title"
@@ -75,10 +84,17 @@ function CardModal({ setCardModal, card }) {
                 </div>
 
                 {/* Members & Due Date */}
-                <MembersDate />
+                {/* <MembersDate /> */}
 
                 {/* Description */}
-                <CardDescription UpdateCard={UpdateCard} newDescription={newDescription} handleDescription={handleDescription} description={cardData.description} />
+                <CardDescription 
+                    UpdateCard={handleUpdateDescription} 
+                    newDescription={newDescription} 
+                    handleDescription={handleDescription} 
+                    description={cardData.description} 
+                    textAreaActive={textAreaActive}
+                    setTextAreaActive={setTextAreaActive}
+                />
 
                 {/* ToDo List */}
                 <ToDoList todosDB={cardData} />
