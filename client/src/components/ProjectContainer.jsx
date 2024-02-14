@@ -1,6 +1,4 @@
-// import { AntDesignOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar } from 'antd';
-// import { Avatar, Tooltip } from 'antd';
 import { useMutation } from "@apollo/client";
 import { useState } from 'react';
 import { ADD_LIST } from '../utils/mutations'
@@ -12,6 +10,9 @@ function ProjectContainer({ projectId, data, showDrawer }) {
     const [title, setTitle] = useState('');
     const [showInput, setShowInput] = useState(false)
 
+    // console.log('Data', data)
+    const users = data.projectId.users
+    // console.log('Users', users)
     const lists = data.projectId?.lists || []
 
     const [AddList] = useMutation(ADD_LIST, {
@@ -26,22 +27,21 @@ function ProjectContainer({ projectId, data, showDrawer }) {
         setTitle(e.target.value)
     }
 
-    // console.log(data)
-
     return (
         <div>
             <div className='flex flex-col'>
                 <h1>{data.projectId.title}</h1>
                 <div className='flex justify-start items-center mb-5'>
                     <button onClick={showDrawer} className='button-cta border-none text-white drop-shadow-xl'>Projects</button>
-                    <div className='ml-5 mt-1'>
+                    <button className='ml-2'>Invite Users</button>
+                    <div className='ml-2 mt-1'>
                         <Avatar.Group maxCount={2} maxStyle={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>
                             {/* <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=2" /> */}
-                            <Avatar style={{ backgroundColor: '#f56a00' }}>K</Avatar>
-                            {/* <Tooltip title="Ant User" placement="top">
-                                <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
-                            </Tooltip> */}
-                            {/* <Avatar style={{ backgroundColor: '#1677ff' }} icon={<AntDesignOutlined />} /> */}
+                            {users.map(user => (
+                                <Avatar key={user._id} style={{ backgroundColor: '#f56a00' }}>
+                                    {user.username.charAt(0).toUpperCase()}
+                                </Avatar>
+                            ))}
                         </Avatar.Group>
                     </div>
                 </div>

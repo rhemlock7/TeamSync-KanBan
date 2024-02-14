@@ -9,6 +9,7 @@ import { QUERY_ONE_PROJECT } from "../utils/queries";
 
 function Home() {
     const [openDrawer, setOpenDrawer] = useState(false);
+    // const [activeProject, setActiveProject] = useState('')
 
     const showDrawer = () => {
         setOpenDrawer(true);
@@ -19,11 +20,11 @@ function Home() {
     };
 
     const { loading, data } = useQuery(QUERY_ONE_PROJECT, {
-        variables: { projectId: "65ca4844697310a1494d15d0" },
+        variables: { projectId: "65cb5f0c8e9ab81f6a0e7b91" },
     });
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div>Loading...</div>
     }
 
     return (
