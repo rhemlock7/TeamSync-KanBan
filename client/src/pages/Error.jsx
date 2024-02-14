@@ -1,7 +1,7 @@
 export default function Error() {
     return (
       <>
-        <section className="relative z-10 bg-primary bg-gray-500 h-full cover py-[120px]">
+        <section className="relative z-10 bg-primary  h-full cover py-[120px]">
           <div className="container mx-auto">
             <div className="-mx-4 flex">
               <div className="w-full px-4">
@@ -16,7 +16,7 @@ export default function Error() {
                     The page you are looking for it maybe deleted
                   </p>
                   <a
-                    href="/Errorpage"
+                    href="/"
                     className="inline-block rounded-lg border border-dark px-8 py-3 text-center text-base font-semibold text-white transition bg-gray-800 hover:bg-dark hover:text-primary"
                   >
                     Go To Home

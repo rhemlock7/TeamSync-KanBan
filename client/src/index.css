@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 :root {
     --accent: #00A8E8;
     --black: #000f13;
@@ -316,4 +317,6 @@ button:hover {
 
   }
   
-  
+  .logout{
+    background-color: #007EA7;
+  }

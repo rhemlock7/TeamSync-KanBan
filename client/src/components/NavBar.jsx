@@ -54,7 +54,7 @@ function Navbar({isAuthenticated, profileId, imgSrc}) {
                   <Link
                     to="/"
                     id="logout"
-                    className="text-gray-300 bg-green-600 hover:bg-green-500 hover:text-white rounded-md px-3 py-2 text-xl font-medium"
+                    className="text-white logout hover:bg-gray-500 hover:text-gray rounded-md px-3 py-2 text-xl font-medium"
                     onClick={() => Auth.logout()}
                   >
                     Logout
