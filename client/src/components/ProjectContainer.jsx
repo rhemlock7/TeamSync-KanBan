@@ -5,17 +5,11 @@ import {useState} from "react";
 import {ADD_LIST} from "../utils/mutations";
 import List from "./List";
 // import { AntDesignOutlined, UserOutlined } from '@ant-design/icons';
-import {Avatar} from "antd";
-// import { Avatar, Tooltip } from 'antd';
-import {useMutation} from "@apollo/client";
-import {useState} from "react";
-import {ADD_LIST} from "../utils/mutations";
-import List from "./List";
 
 function ProjectContainer({projectId, data}) {
   const [title, setTitle] = useState("");
   const [showInput, setShowInput] = useState(false);
-
+  console.log(data.users);
   const [AddList] = useMutation(ADD_LIST, {
     variables: {title: title, projectId: projectId},
     onCompleted: (data) => {
@@ -31,18 +25,21 @@ function ProjectContainer({projectId, data}) {
     setTitle(e.target.value);
   }
 
-  const lists = data.projectId?.lists || [];
+  const lists = data.lists || [];
 
   return (
     <div>
       <div className="flex justify-start items-center">
-        <h1>{data.projectId.title}</h1>
+        <h1>{data.title}</h1>
         <div className="ml-5 mt-2">
           <Avatar.Group
             maxCount={2}
             maxStyle={{color: "#f56a00", backgroundColor: "#fde3cf"}}
           >
-            <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=2" />
+            {data.users.map((user) => (
+              <Avatar src={user.img} />
+            ))}
+            {/* <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=2" />
             <Avatar style={{backgroundColor: "#f56a00"}}>K</Avatar>
             <Tooltip title="Ant User" placement="top">
               <Avatar
@@ -53,7 +50,7 @@ function ProjectContainer({projectId, data}) {
             <Avatar
               style={{backgroundColor: "#1677ff"}}
               icon={<AntDesignOutlined />}
-            />
+            /> */}
           </Avatar.Group>
         </div>
       </div>

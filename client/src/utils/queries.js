@@ -95,6 +95,8 @@ query GetUser($userId: ID!) {
       users {
         _id
         username
+        email
+        img
       }
       lists {
         _id
@@ -122,6 +124,5 @@ query GetUser($userId: ID!) {
     }
   }
 }
-
 `;
 

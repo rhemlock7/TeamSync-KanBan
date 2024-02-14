@@ -8,10 +8,12 @@ export default function ProfileSetting() {
   if (!Auth.loggedIn()) {
     window.location.assign("/");
   }
+
   const {profileId} = useParams();
   const {loading, data} = useQuery(GET_USER, {
     variables: {userId: profileId},
   });
+
   const [updateUser, upUser] = useMutation(UPDATE_USER);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -19,25 +21,14 @@ export default function ProfileSetting() {
   const [linkedIn, setLinkedIn] = useState("");
   const [imgUrl, setImgUrl] = useState("");
   const [change, setChange] = useState(false);
+
   if (loading) {
     return <div>Loading...</div>;
   }
-  //   console.log(data);
 
-  //   useEffect(() => {
-  //     if (!loading) {
-  //       setUsername(data.user.username);
-  //       setEmail(data.user.email);
-  //       if (data.user.linkedIn) {
-  //         setLinkedIn(data.user.linkedIn);
-  //       }
-  //       if (data.user.gitHub) {
-  //         setGitHub(data.user.gitHub);
-  //       }
-  //       setImgUrl(data.user.img);
-  //     }
-  //   }, []);
-
+  // useEffect(() => {
+  //   console.log(`work`);
+  // }, []);
   function handleUsername(e) {
     e.preventDefault();
     setUsername(e.target.value);
@@ -151,7 +142,7 @@ export default function ProfileSetting() {
                       id="username"
                       className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
                       placeholder="Your username"
-                      value={username}
+                      value={username ? username : data.user.username}
                       onChange={handleUsername}
                       required
                     />
@@ -168,7 +159,7 @@ export default function ProfileSetting() {
                     className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
                     placeholder="Your email@mail.com"
                     required
-                    value={email}
+                    value={email ? email : data.user.email}
                     onChange={handleEmail}
                   />
                 </div>
@@ -183,7 +174,9 @@ export default function ProfileSetting() {
                     className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
                     placeholder="Your GitHub link"
                     required
-                    value={gitHub}
+                    value={
+                      gitHub ? gitHub : data.user.gitHub ? data.user.gitHub : ""
+                    }
                     onChange={handleGitHub}
                   />
                 </div>
@@ -198,7 +191,13 @@ export default function ProfileSetting() {
                     className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
                     placeholder="Your LinkedIn link"
                     required
-                    value={linkedIn}
+                    value={
+                      linkedIn
+                        ? linkedIn
+                        : data.user.linkedIn
+                        ? data.user.linkedIn
+                        : ""
+                    }
                     onChange={handleLinkedIn}
                   />
                 </div>

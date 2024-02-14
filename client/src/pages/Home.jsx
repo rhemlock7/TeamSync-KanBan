@@ -3,8 +3,9 @@ import {useState} from "react";
 import ProjectContainer from "../components/ProjectContainer";
 import ProjectSideNav from "../components/ProjectSideNav";
 import {Drawer} from "antd";
+import Auth from "../utils/auth";
 
-import {QUERY_ONE_PROJECT} from "../utils/queries";
+import {GET_USER, QUERY_ONE_PROJECT} from "../utils/queries";
 
 function Home() {
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -17,14 +18,21 @@ function Home() {
     setOpenDrawer(false);
   };
 
-  const {loading, data} = useQuery(QUERY_ONE_PROJECT, {
-    variables: {projectId: "65ca4844697310a1494d15d0"},
+  const {loading, data} = useQuery(GET_USER, {
+    variables: {userId: Auth.getProfile().authenticatedPerson._id},
   });
+
+  //   const {loading, data} = useQuery(QUERY_ONE_PROJECT, {
+  //     variables: {projectId: "65cbc6dc8d1a3f185aa77c99"},
+  //   });
 
   if (loading) {
     return <div>Loading...</div>;
   }
-
+  console.log(data);
+  if (data.user.projects.length < 1) {
+    return <div>Add new project</div>;
+  }
   return (
     <div className="">
       <div className="darkGray-bg text-white">
@@ -41,8 +49,14 @@ function Home() {
       <div className="">
         <div className="gradient-bg px-5 h-screen">
           <ProjectContainer
-            data={data}
-            projectId={data.projectId._id}
+            data={
+              data.user.projects[0]
+              //   data.projectId
+            }
+            projectId={
+              data.user.projects[0]._id
+              //   data.projectId._id
+            }
             showDrawer={showDrawer}
           />
         </div>
