@@ -34,7 +34,6 @@ function Home() {
     return <div>Add new project</div>;
   }
 
-  console.log(Auth.getProfile().authenticatedPerson);
   return (
     <div className="">
       <div className="darkGray-bg text-white">

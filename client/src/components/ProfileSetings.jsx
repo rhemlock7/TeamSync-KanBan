@@ -26,9 +26,6 @@ export default function ProfileSetting() {
     return <div>Loading...</div>;
   }
 
-  // useEffect(() => {
-  //   console.log(`work`);
-  // }, []);
   function handleUsername(e) {
     e.preventDefault();
     setUsername(e.target.value);

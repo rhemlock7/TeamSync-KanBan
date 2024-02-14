@@ -182,9 +182,11 @@ const resolvers = {
       }, { title }, { new: true })
     },
     addUserProject: async (parent, { projectId, userId }) => {
-      return Project.findOneAndUpdate({
+      const project = await Project.findOneAndUpdate({
         _id: projectId
-      }, { $addToSet: { users: userId } }, { new: true })
+      }, { $addToSet: { users: userId } }, { new: true });
+      await User.findOneAndUpdate({ _id: userId }, { $addToSet: { projects: projectId } }, { new: true });
+      return project
     },
     removeProject: async (parent, { projectId, userId }) => {
       let project = Project.findOneAndDelete({
