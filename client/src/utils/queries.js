@@ -33,6 +33,9 @@ query getProjectByID($projectId: ID!) {
       _id
       username
       email
+      gitHub
+      linkedIn
+      img
     }
     lists {
       _id
@@ -50,8 +53,14 @@ query getProjectByID($projectId: ID!) {
           commentAuthor
           createdAt
         }
+        toDoes {
+          _id
+          text
+          isCompleted
+        }
       }
     }
+    createdBy
   }
 }
 `;

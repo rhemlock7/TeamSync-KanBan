@@ -9,7 +9,7 @@ import {GET_USER, QUERY_ONE_PROJECT} from "../utils/queries";
 
 function Home() {
   const [openDrawer, setOpenDrawer] = useState(false);
-  // const [activeProject, setActiveProject] = useState('')
+  const [activeProject, setActiveProject] = useState("");
 
   const showDrawer = () => {
     setOpenDrawer(true);
@@ -18,22 +18,22 @@ function Home() {
   const onClose = () => {
     setOpenDrawer(false);
   };
-
+  console.log(Auth.getProfile());
   const {loading, data} = useQuery(GET_USER, {
     variables: {userId: Auth.getProfile().authenticatedPerson._id},
   });
 
-  // const {loading, data} = useQuery(QUERY_ONE_PROJECT, {
-  //   variables: {projectId: "65cbc6dc8d1a3f185aa77c99"},
-  // });
-
   if (loading) {
     return <div>Loading...</div>;
   }
-  console.log(data);
+  function setProject(id) {
+    setActiveProject(id);
+  }
+
   if (data.user.projects.length < 1) {
     return <div>Add new project</div>;
   }
+
   return (
     <div className="">
       <div className="darkGray-bg text-white">
@@ -44,22 +44,40 @@ function Home() {
           onClose={onClose}
           open={openDrawer}
         >
-          <ProjectSideNav data={data} />
+          <ProjectSideNav projects={data.user} setProject={setProject} />
         </Drawer>
       </div>
       <div className="">
         <div className="gradient-bg px-5 h-screen">
-          <ProjectContainer
-            data={
-              data.user.projects[0]
-              // data.projectId
-            }
-            projectId={
-              data.user.projects[0]._id
-              // data.projectId._id
-            }
-            showDrawer={showDrawer}
-          />
+          <button
+            onClick={showDrawer}
+            className="button-cta border-none text-white drop-shadow-xl"
+          >
+            Projects
+          </button>
+          {activeProject ? (
+            <ProjectContainer
+              // data={
+              //   data.user.projects[0]
+              //   // data.projectId
+              // }
+              projectId={
+                activeProject
+                // data.projectId._id
+              }
+            />
+          ) : (
+            <ProjectContainer
+              // data={
+              //   data.user.projects[0]
+              //   // data.projectId
+              // }
+              projectId={
+                data.user.projects[0]._id
+                // data.projectId._id
+              }
+            />
+          )}
         </div>
       </div>
     </div>

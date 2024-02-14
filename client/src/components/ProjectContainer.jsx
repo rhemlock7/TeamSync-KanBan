@@ -1,21 +1,28 @@
 import {Avatar} from "antd";
-import {useMutation} from "@apollo/client";
+import {useMutation, useQuery} from "@apollo/client";
 import {useState} from "react";
 import {ADD_LIST} from "../utils/mutations";
 import List from "./List";
-
-function ProjectContainer({projectId, data, showDrawer}) {
+import Profile from "./Profile";
+import {QUERY_ONE_PROJECT} from "../utils/queries";
+function ProjectContainer({projectId}) {
   const [title, setTitle] = useState("");
   const [showInput, setShowInput] = useState(false);
-
-  // console.log('Data', data)
-  const users = data.users;
-  // console.log('Users', users)
-  const lists = data?.lists || [];
-
+  const [avata, setAvata] = useState();
+  // console.log(projectId);
   const [AddList] = useMutation(ADD_LIST, {
     variables: {title: title, projectId: projectId},
   });
+  const {loading, data} = useQuery(QUERY_ONE_PROJECT, {
+    variables: {projectId: projectId},
+  });
+  if (loading) {
+    return <div>loading</div>;
+  }
+  console.log(data);
+  const users = data.projectId.users;
+  // console.log('Users', users)
+  const lists = data.projectId?.lists || [];
 
   function handleShowInput() {
     setShowInput(!showInput);
@@ -25,33 +32,33 @@ function ProjectContainer({projectId, data, showDrawer}) {
     setTitle(e.target.value);
   }
 
+  function avatarHandller(e) {
+    e.preventDefault();
+    setAvata(<Profile />);
+  }
+
+  function deleteAvatar() {
+    setAvata();
+  }
   return (
     <div>
       <div className="flex flex-col">
         <h1>{data.title}</h1>
         <div className="flex justify-start items-center mb-5">
-          <button
-            onClick={showDrawer}
-            className="button-cta border-none text-white drop-shadow-xl"
-          >
-            Projects
-          </button>
           <button className="ml-2">Invite Users</button>
           <div className="ml-2 mt-1">
             <Avatar.Group
               maxCount={2}
               maxStyle={{color: "#f56a00", backgroundColor: "#fde3cf"}}
             >
-              {/* <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=2" /> */}
               {users.map((user) => (
                 <Avatar
                   key={user._id}
-                  // style={{backgroundColor: "#f56a00"}}
                   src={user.img}
-                >
-                  {/* {user.username.charAt(0).toUpperCase()} */}
-                </Avatar>
+                  onClick={!avata ? avatarHandller : deleteAvatar}
+                ></Avatar>
               ))}
+              {avata}
             </Avatar.Group>
           </div>
         </div>
