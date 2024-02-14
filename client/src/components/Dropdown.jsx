@@ -4,11 +4,6 @@ import {Button, Dropdown, message, Space, Tooltip} from "antd";
 import {useQuery} from "@apollo/client";
 import {GET_ALL_USERS} from "../utils/queries";
 
-const handleMenuClick = (e) => {
-  message.info("Click on menu item.");
-  console.log("click", e);
-};
-
 export default function DropDown() {
   const {loading, data} = useQuery(GET_ALL_USERS);
   const items = [];
@@ -22,7 +17,10 @@ export default function DropDown() {
         icon: <UserOutlined />,
       })
     );
-
+    const handleMenuClick = (e) => {
+      message.info("Click on menu item.");
+      console.log("click", e);
+    };
     const prop = {
       items,
       onClick: handleMenuClick,
