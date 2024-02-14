@@ -17,13 +17,13 @@ function ToDoList({ todosDB }) {
     //     // refetchQueries: [QUERY_ONE_PROJECT, 'projectId']
     // });
 
+    console.log(todos)
 
     // Helper functions
     function addTodo() {
         const newArr = [...todos, { text: '', isCompleted: false }];
         setTodos(newArr);
         // TODO: Work on pushing the entire array back up to the DB.
-        // AddToDo({variables: {cardId: todosDB._id, text:}})
         setEditingIndex(newArr.length - 1);
     }
 
@@ -66,14 +66,14 @@ function ToDoList({ todosDB }) {
 
     // To-do props
     const listOfToDos = todosDB.toDoes
-    // console.log('TODOs', listOfToDos)
+    console.log('TODOs', listOfToDos)
 
     return (
         <section className='my-4'>
             <h3>ToDo List</h3>
             <Progress percent={todoProgress()} />
             <div>
-                {listOfToDos.map((todo, index) => (
+                {todos.map((todo, index) => (
                     <div key={index}>
                         {editingIndex === index ? (
                             <>
