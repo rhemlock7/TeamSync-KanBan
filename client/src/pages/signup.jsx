@@ -33,6 +33,8 @@ const Signup = () => {
       });
 
       Auth.login(data.addUser.token);
+      window.location.href = "/Home";
+
     } catch (e) {
       console.error(e);
     }

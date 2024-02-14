@@ -15,12 +15,17 @@ const Login = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+
     try {
       const { data } = await login({ variables: { ...formState } });
       Auth.login(data.login.token);
+      window.location.href = "/Home";
+
     } catch (error) {
       console.error("Login error:", error);
+
     }
+    
     setFormState({ email: "", password: "" });
   };
 
