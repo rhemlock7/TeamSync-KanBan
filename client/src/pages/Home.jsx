@@ -19,13 +19,13 @@ function Home() {
     setOpenDrawer(false);
   };
 
-  // const {loading, data} = useQuery(GET_USER, {
-  //   variables: {userId: Auth.getProfile().authenticatedPerson._id},
-  // });
-
-  const {loading, data} = useQuery(QUERY_ONE_PROJECT, {
-    variables: {projectId: "65cbc6dc8d1a3f185aa77c99"},
+  const {loading, data} = useQuery(GET_USER, {
+    variables: {userId: Auth.getProfile().authenticatedPerson._id},
   });
+
+  // const {loading, data} = useQuery(QUERY_ONE_PROJECT, {
+  //   variables: {projectId: "65cbc6dc8d1a3f185aa77c99"},
+  // });
 
   if (loading) {
     return <div>Loading...</div>;
@@ -44,7 +44,7 @@ function Home() {
           onClose={onClose}
           open={openDrawer}
         >
-          <ProjectSideNav />
+          <ProjectSideNav data={data} />
         </Drawer>
       </div>
       <div className="">
@@ -52,11 +52,11 @@ function Home() {
           <ProjectContainer
             data={
               data.user.projects[0]
-              //   data.projectId
+              // data.projectId
             }
             projectId={
               data.user.projects[0]._id
-              //   data.projectId._id
+              // data.projectId._id
             }
             showDrawer={showDrawer}
           />

@@ -9,9 +9,9 @@ function ProjectContainer({projectId, data, showDrawer}) {
   const [showInput, setShowInput] = useState(false);
 
   // console.log('Data', data)
-  const users = data.projectId.users;
+  const users = data.users;
   // console.log('Users', users)
-  const lists = data.projectId?.lists || [];
+  const lists = data?.lists || [];
 
   const [AddList] = useMutation(ADD_LIST, {
     variables: {title: title, projectId: projectId},
@@ -28,7 +28,7 @@ function ProjectContainer({projectId, data, showDrawer}) {
   return (
     <div>
       <div className="flex flex-col">
-        <h1>{data.projectId.title}</h1>
+        <h1>{data.title}</h1>
         <div className="flex justify-start items-center mb-5">
           <button
             onClick={showDrawer}
@@ -44,8 +44,12 @@ function ProjectContainer({projectId, data, showDrawer}) {
             >
               {/* <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=2" /> */}
               {users.map((user) => (
-                <Avatar key={user._id} style={{backgroundColor: "#f56a00"}}>
-                  {user.username.charAt(0).toUpperCase()}
+                <Avatar
+                  key={user._id}
+                  // style={{backgroundColor: "#f56a00"}}
+                  src={user.img}
+                >
+                  {/* {user.username.charAt(0).toUpperCase()} */}
                 </Avatar>
               ))}
             </Avatar.Group>
