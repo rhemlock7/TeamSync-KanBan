@@ -4,7 +4,8 @@ import Auth from "../utils/auth";
 function Navbar({isAuthenticated, profileId, imgSrc}) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   return (
-    <nav className="sticky top-0 z-4 w-full py-3 darkGray-bg border-b border-gray-300">
+    <nav className="sticky top-0 z-4 w-full py-3  border-b border-gray-900 absolute inset-0 navbar opacity-100">
+        
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">

@@ -20,7 +20,7 @@ function Home() {
     };
 
     const { loading, data } = useQuery(QUERY_ONE_PROJECT, {
-        variables: { projectId: "65cb5f0c8e9ab81f6a0e7b91" },
+        variables: { projectId: "65cce300c2d6f4d99e792d33" },
     });
 
     if (loading) {

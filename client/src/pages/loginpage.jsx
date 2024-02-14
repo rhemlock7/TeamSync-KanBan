@@ -26,11 +26,11 @@ const Login = () => {
 
   return (
     <section className=" flex flex-col items-center justify-center">
-      <div className="text-center mb-10 text-3xl">
-        <h4 className="mt-20 text-xl font-semibold">TeamSync</h4>
+      <div className="text-center  text-3xl">
+      <img  src="src/assets/logoo.png" alt="TeamSync logo" width="200" height="200" />
       </div>
 
-      <div className="darkGray-bg login-card rounded-lg p-10 max-w-3xl w-full lg:w-4/4 text-gray-700 shadow-xl">
+      <div className="cards mb-40 login-card rounded-lg p-10 max-w-3xl w-full lg:w-4/4 text-gray-700 shadow-xl">
         <h2 className="text-center text-white text-lg font-bold mb-6">Login</h2>
 
         {data ? (
@@ -82,7 +82,7 @@ const Login = () => {
 
             <div>
               <button id="login-btn" type="submit"
-              className="w-full inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-lg font-medium rounded-md text-white bg-gray-900 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+              className="w-full inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-lg font-medium rounded-md text-white bg-gray-900 hover:bg-gray-300 hover:text-black ocus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                 <Link to="/Home">
                   Sign in
                 </Link>
@@ -101,7 +101,7 @@ const Login = () => {
           Not a member?{" "}
           <Link
             to="/signup"
-            className="font-semibold leading-6 text-gray-600 hover:text-white"
+            className="font-semibold leading-6 text-gray-200 hover:text-white"
           >
             Sign up
           </Link>
