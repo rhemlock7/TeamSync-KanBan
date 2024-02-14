@@ -1,90 +1,97 @@
-import { Avatar } from "antd";
-import { useMutation, useQuery } from "@apollo/client";
-import { useState } from "react";
-import { ADD_LIST } from "../utils/mutations";
+import {Avatar} from "antd";
+import {useMutation, useQuery} from "@apollo/client";
+import {useState} from "react";
+import {ADD_LIST} from "../utils/mutations";
 import List from "./List";
 // import Profile from "./Profile";
-import { QUERY_ONE_PROJECT } from "../utils/queries";
-function ProjectContainer({ projectId }) {
-    const [title, setTitle] = useState("");
-    const [showInput, setShowInput] = useState(false);
-    // const [avata, setAvata] = useState();
-    
-    // console.log(projectId);
-    const [AddList] = useMutation(ADD_LIST, {
-        variables: { title: title, projectId: projectId },
-    });
-    const { loading, data } = useQuery(QUERY_ONE_PROJECT, {
-        variables: { projectId: projectId },
-    });
-    if (loading) {
-        return <div>loading</div>;
-    }
-    console.log(data);
-    const users = data.projectId.users;
-    // console.log('Users', users)
-    const lists = data.projectId?.lists || [];
+import {GET_ALL_USERS, QUERY_ONE_PROJECT} from "../utils/queries";
+import DropDown from "./Dropdown";
+function ProjectContainer({projectId}) {
+  const [title, setTitle] = useState("");
+  const [showInput, setShowInput] = useState(false);
+  // const [avata, setAvata] = useState();
 
-    function handleShowInput() {
-        setShowInput(!showInput);
-    }
+  // console.log(projectId);
+  const [AddList] = useMutation(ADD_LIST, {
+    variables: {title: title, projectId: projectId},
+  });
+  const {loading, data} = useQuery(QUERY_ONE_PROJECT, {
+    variables: {projectId: projectId},
+  });
 
-    function handleSetTitle(e) {
-        setTitle(e.target.value);
-    }
+  if (loading) {
+    return <div>loading</div>;
+  }
+  // console.log(usersData.data.users);
+  const users = data.projectId.users;
+  const lists = data.projectId?.lists || [];
 
-    return (
-        <div className='pb-6 md:pb-0 mb-0'>
-            <div className='flex flex-col'>
-                <h1>{data.projectId.title}</h1>
-                <div className='flex justify-start items-center mb-5'>
-                    {/* <button onClick={showDrawer} className='button-cta border-none text-white drop-shadow-xl'>Projects</button> */}
-                    <button className='ml-2'>Invite Users</button>
-                    <div className='ml-2 mt-1'>
-                        <Avatar.Group maxCount={2} maxStyle={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>
-                            {/* <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=2" /> */}
-                            {users.map(user => (
-                                <Avatar key={user._id} style={{ backgroundColor: '#f56a00' }}>
-                                    {user.username.charAt(0).toUpperCase()}
-                                </Avatar>
-                            ))}
-                        </Avatar.Group>
-                    </div>
-                </div>
-            </div>
-            <div className='md:overflow-x-auto'>
-                <div className="grid grid-flow-row lg:grid-flow-col auto-cols-max gap-x-3">
-                    {lists.map((list) => (
-                        < List
-                            title={list.title}
-                            cards={list}
-                            key={list._id}
-                            listId={list._id}
-                            projectId={projectId}
-                        />
-                    ))}
-                    <div className='flex flex-col'>
-                        <button onClick={handleShowInput} className='new-list-bttn'>Create a new list</button>
-                        {showInput ? (
-                            <form onSubmit={AddList} className='flex flex-col mt-2'>
-                                <label>What is your List name?</label>
-                                <input
-                                    type='text'
-                                    placeholder='list name'
-                                    id='list-input'
-                                    className='p-1'
-                                    value={title}
-                                    onChange={handleSetTitle}
-                                />
-                                <button type='submit'>Submit</button>
-                            </form>
+  function handleShowInput() {
+    setShowInput(!showInput);
+  }
 
-                        ) : <></>}
-                    </div>
-                </div>
-            </div>
+  function handleSetTitle(e) {
+    setTitle(e.target.value);
+  }
+
+  return (
+    <div className="pb-6 md:pb-0 mb-0">
+      <div className="flex flex-col">
+        <h1>{data.projectId.title}</h1>
+        <div className="flex justify-start items-center mb-5">
+          {/* <button onClick={showDrawer} className='button-cta border-none text-white drop-shadow-xl'>Projects</button> */}
+          <DropDown />
+          <div className="ml-2 mt-1">
+            <Avatar.Group
+              maxCount={2}
+              maxStyle={{color: "#f56a00", backgroundColor: "#fde3cf"}}
+            >
+              {/* <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=2" /> */}
+              {users.map((user) => (
+                <Avatar key={user._id} style={{backgroundColor: "#f56a00"}}>
+                  {user.username.charAt(0).toUpperCase()}
+                </Avatar>
+              ))}
+            </Avatar.Group>
+          </div>
         </div>
-    )
+      </div>
+      <div className="md:overflow-x-auto">
+        <div className="grid grid-flow-row lg:grid-flow-col auto-cols-max gap-x-3">
+          {lists.map((list) => (
+            <List
+              title={list.title}
+              cards={list}
+              key={list._id}
+              listId={list._id}
+              projectId={projectId}
+            />
+          ))}
+          <div className="flex flex-col">
+            <button onClick={handleShowInput} className="new-list-bttn">
+              Create a new list
+            </button>
+            {showInput ? (
+              <form onSubmit={AddList} className="flex flex-col mt-2">
+                <label>What is your List name?</label>
+                <input
+                  type="text"
+                  placeholder="list name"
+                  id="list-input"
+                  className="p-1"
+                  value={title}
+                  onChange={handleSetTitle}
+                />
+                <button type="submit">Submit</button>
+              </form>
+            ) : (
+              <></>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default ProjectContainer;

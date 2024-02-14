@@ -31,7 +31,31 @@ function Home() {
   }
 
   if (data.user.projects.length < 1) {
-    return <div>Add new project</div>;
+    return (
+      <div className="">
+        <div className="darkGray-bg text-white">
+          <Drawer
+            title="Projects"
+            placement="left"
+            closeable="false"
+            onClose={onClose}
+            open={openDrawer}
+          >
+            <ProjectSideNav projects={data.user} setProject={setProject} />
+          </Drawer>
+        </div>
+        <div className="">
+          <div className="gradient-bg px-5 h-screen">
+            <button
+              onClick={showDrawer}
+              className="button-cta border-none text-white drop-shadow-xl"
+            >
+              Projects
+            </button>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   console.log(Auth.getProfile().authenticatedPerson);
