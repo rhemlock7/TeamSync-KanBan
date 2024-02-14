@@ -11,7 +11,7 @@ function LandingPage() {
           </div>
           
           <div className="relative z-10 flex flex-col justify-center items-center h-full text-center">
-            <img className="main-logo" src="/assets/images/TravelMateLogo.png" alt="TeamSync logo" />
+            <img className="main-logo" src="src/assets/teamsync.png" alt="TeamSync logo" />
             <p className="text-lg text-gray-300 mt-8 text-white">Sync with Team Sync, Project Mangement made simple.</p>
             <Link to='/signup'className="darkGray-bg text-white hover:bg-gray-500 py-3 px-6 rounded-full text-lg font-bold  transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg">
                Get Started</Link>
