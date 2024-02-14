@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: <Landing />,
       },
       {
         path: "/profile/:profileId",
@@ -36,8 +36,8 @@ const router = createBrowserRouter([
         element: <About />,
       },
       {
-        path: "/LandingPage",
-        element: <Landing />,
+        path: '/Home',
+        element: <Home />
       },
     ],
   },
