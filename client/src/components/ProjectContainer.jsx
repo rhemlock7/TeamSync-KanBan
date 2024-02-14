@@ -48,7 +48,7 @@ function ProjectContainer({projectId}) {
         <h1>{data.projectId.title}</h1>
         <div className="flex justify-start items-center mb-5">
           {/* <button onClick={showDrawer} className='button-cta border-none text-white drop-shadow-xl'>Projects</button> */}
-          <DropDown />
+          <DropDown projectId={projectId} />
           <div className="ml-2 mt-1">
             <Avatar.Group
               maxCount={2}

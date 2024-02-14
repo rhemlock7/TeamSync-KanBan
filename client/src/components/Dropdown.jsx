@@ -1,10 +1,15 @@
 import React from "react";
 import {DownOutlined, UserOutlined} from "@ant-design/icons";
 import {Button, Dropdown, message, Space, Tooltip} from "antd";
-import {useQuery} from "@apollo/client";
-import {GET_ALL_USERS} from "../utils/queries";
+import {useMutation, useQuery} from "@apollo/client";
+import {GET_ALL_USERS, QUERY_ONE_PROJECT} from "../utils/queries";
+import {ADD_USER_PROJECT} from "../utils/mutations";
 
-export default function DropDown() {
+export default function DropDown({projectId}) {
+  //   console.log(projectId);
+  const [addUserProject] = useMutation(ADD_USER_PROJECT, {
+    refetchQueries: [QUERY_ONE_PROJECT, "projectId"],
+  });
   const {loading, data} = useQuery(GET_ALL_USERS);
   const items = [];
   if (loading) {
@@ -17,13 +22,15 @@ export default function DropDown() {
         icon: <UserOutlined />,
       })
     );
-    const handleMenuClick = (e) => {
-      message.info("Click on menu item.");
-      console.log("click", e);
+
+    const handleButtonClick = (e) => {
+      const found = data.users.find((user) => user._id === e.key);
+      message.info(`You added ${found.username} to your project`);
+      addUserProject({variables: {projectId: projectId, userId: e.key}});
     };
     const prop = {
       items,
-      onClick: handleMenuClick,
+      onClick: handleButtonClick,
     };
 
     return (
@@ -31,7 +38,7 @@ export default function DropDown() {
         <Dropdown menu={prop}>
           <Button>
             <Space>
-              Button
+              Add User to Project
               <DownOutlined />
             </Space>
           </Button>
