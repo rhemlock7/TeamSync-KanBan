@@ -1,15 +1,15 @@
 import { useQuery } from "@apollo/client";
-import { useState } from 'react';
+import { useState } from "react";
 import ProjectContainer from "../components/ProjectContainer";
-import ProjectSideNav from '../components/ProjectSideNav';
-import { Drawer } from 'antd';
+import ProjectSideNav from "../components/ProjectSideNav";
+import { Drawer } from "antd";
+import Auth from "../utils/auth";
 
-
-import { QUERY_ONE_PROJECT } from "../utils/queries";
+import { GET_USER } from "../utils/queries";
 
 function Home() {
     const [openDrawer, setOpenDrawer] = useState(false);
-    // const [activeProject, setActiveProject] = useState('')
+    const [activeProject, setActiveProject] = useState("");
 
     const showDrawer = () => {
         setOpenDrawer(true);
@@ -18,37 +18,58 @@ function Home() {
     const onClose = () => {
         setOpenDrawer(false);
     };
-
-    const { loading, data } = useQuery(QUERY_ONE_PROJECT, {
-        variables: { projectId: "65ca4844697310a1494d15d0" },
+    
+    const { loading, data } = useQuery(GET_USER, {
+        variables: { userId: Auth.getProfile().authenticatedPerson._id },
     });
 
     if (loading) {
-        return <div>Loading...</div>
+        return <div>Loading...</div>;
+    }
+    function setProject(id) {
+        setActiveProject(id);
     }
 
-    console.log(data)
+    if (data.user.projects.length < 1) {
+        return <div>Add new project</div>;
+    }
 
+    console.log(Auth.getProfile().authenticatedPerson);
     return (
-        <div className=''>
-            <div className='darkGray-bg text-white'>
+        <div className="">
+            <div className="darkGray-bg text-white">
                 <Drawer
-                    title='Projects'
+                    title="Projects"
                     placement="left"
-                    closeable='false'
+                    closeable="false"
                     onClose={onClose}
                     open={openDrawer}
                 >
-                    <ProjectSideNav />
+                    <ProjectSideNav projects={data.user} setProject={setProject} />
                 </Drawer>
             </div>
-            <div className=''>
+            <div className="">
                 <div className="gradient-bg px-5 h-screen">
-                    <ProjectContainer
-                        data={data}
-                        projectId={data.projectId._id}
-                        showDrawer={showDrawer}
-                    />
+                    <button
+                        onClick={showDrawer}
+                        className="button-cta border-none text-white drop-shadow-xl"
+                    >
+                        Projects
+                    </button>
+                    {activeProject ? (
+                        <ProjectContainer
+                            projectId={
+                                activeProject
+                            }
+                        />
+                    ) : (
+                        <ProjectContainer
+
+                            projectId={
+                                data.user.projects[0]._id
+                            }
+                        />
+                    )}
                 </div>
             </div>
         </div>
