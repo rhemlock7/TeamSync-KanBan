@@ -63,20 +63,23 @@ function ProjectSideNav({ projects, setProject }) {
                 </form>
             ) : <></>}
             {projects.projects.map((project) => (
-                <div className="flex justify-between items-center" key={project._id}>
-                    <Link onClick={() => setProject(project._id)}>{project.title}</Link>
-                    <div className="cursor-pointer">
-                        <Popconfirm
-                            title="Delete the task"
-                            description="Are you sure to delete this list?"
-                            icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
-                            okText='Delete'
-                            okType='danger'
-                            onConfirm={() => handleRemoveProject(project._id)}
-                        >
-                            <DeleteTwoTone twoToneColor="#eb2f96" />
-                        </Popconfirm>
+                <div key={project._id}>
+                    <div className="flex justify-between items-center my-3" >
+                        <Link className="text-xl" onClick={() => setProject(project._id)}>{project.title}</Link>
+                        <div className="cursor-pointer">
+                            <Popconfirm
+                                title="Delete the task"
+                                description="Are you sure to delete this list?"
+                                icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
+                                okText='Delete'
+                                okType='danger'
+                                onConfirm={() => handleRemoveProject(project._id)}
+                            >
+                                <DeleteTwoTone className="text-xl" twoToneColor="#eb2f96" />
+                            </Popconfirm>
+                        </div>
                     </div>
+                    <hr></hr>
                 </div>
             ))}
         </div>
