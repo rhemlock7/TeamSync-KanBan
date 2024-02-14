@@ -56,27 +56,9 @@ function Home() {
             Projects
           </button>
           {activeProject ? (
-            <ProjectContainer
-              // data={
-              //   data.user.projects[0]
-              //   // data.projectId
-              // }
-              projectId={
-                activeProject
-                // data.projectId._id
-              }
-            />
+            <ProjectContainer projectId={activeProject} />
           ) : (
-            <ProjectContainer
-              // data={
-              //   data.user.projects[0]
-              //   // data.projectId
-              // }
-              projectId={
-                data.user.projects[0]._id
-                // data.projectId._id
-              }
-            />
+            <ProjectContainer projectId={data.user.projects[0]._id} />
           )}
         </div>
       </div>
