@@ -5,7 +5,7 @@ import ProjectSideNav from "../components/ProjectSideNav";
 import {Drawer} from "antd";
 import Auth from "../utils/auth";
 
-import {GET_USER, QUERY_ONE_PROJECT} from "../utils/queries";
+import {GET_USER} from "../utils/queries";
 
 function Home() {
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -18,7 +18,7 @@ function Home() {
   const onClose = () => {
     setOpenDrawer(false);
   };
-  console.log(Auth.getProfile());
+
   const {loading, data} = useQuery(GET_USER, {
     variables: {userId: Auth.getProfile().authenticatedPerson._id},
   });
@@ -34,6 +34,7 @@ function Home() {
     return <div>Add new project</div>;
   }
 
+  console.log(Auth.getProfile().authenticatedPerson);
   return (
     <div className="">
       <div className="darkGray-bg text-white">
