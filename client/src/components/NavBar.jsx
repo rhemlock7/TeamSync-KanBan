@@ -4,7 +4,7 @@ import Auth from "../utils/auth";
 function Navbar({isAuthenticated, profileId, imgSrc}) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   return (
-    <nav className="sticky top-0 z-4 w-full py-3  border-b border-gray-900 absolute inset-0 navbar opacity-100">
+    <nav className=" w-full py-3  border-b border-gray-900  inset-0 navbar opacity-100">
         
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
@@ -21,15 +21,14 @@ function Navbar({isAuthenticated, profileId, imgSrc}) {
               {/* Button icons */}
             </button>
           </div>
-          <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+          <div className="flex flex-1 items-center justify-between ">
             <Link to="/" className="flex flex-shrink-0 items-center">
-            <img src="src/assets/logo.png" className="h-8 w-auto" alt="Logo" />  </Link>
+            <img src="src/assets/logo.png" className="h-10 w-auto" alt="Logo" />  </Link>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
                 <Link
                   to="/about"
                   className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-xl font-medium"
-                  // onClick={() => Auth.logout()}
                 >
                   About Us
                 </Link>

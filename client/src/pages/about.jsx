@@ -8,51 +8,49 @@ const people = [
   {
     name: "Mustapha Kromah",
     role: "Co-Founder / CEO",
-    imageUrl:"../src/assets/mmk.PNG"
-    
+    imageUrl: "../src/assets/mmk.PNG",
   },
   {
     name: "Mykhalio Zakharkiv",
     role: "Co-Founder / CEO",
-    imageUrl:"../src/assets/mykhalio.png"
+    imageUrl: "../src/assets/mykhalio.png",
   },
 ];
 
 export default function About() {
   return (
     <div className="bg-white py-24 sm:py-32">
-    <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
-      <div className="max-w-2xl">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          Meet our leadership
-        </h2>
-        <p className="mt-6 text-lg leading-8 text-gray-600">
-          Libero fames augue nisl porttitor nisi, quis. Id ac elit odio vitae
-          elementum enim vitae ullamcorper suspendisse.
-        </p>
-      </div>
-      <ul
-        role="list"
-        className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
-      > 
-      {people.map((person) => (
-        <li key={person.name}>
-          
-          <div className="flex items-center gap-x-6">
-            <img
-              className="h-24 w-24 rounded-full object-cover"
-              src={person.imageUrl}
-              alt=""
-            />
-            
-            <div>
-              <h3 className="text-lg font-semibold leading-7 text-gray-900">
-                {person.name}
-              </h3>
-              <p className="text-base font-semibold leading-6 text-gray-600">
-                {person.role}
-              </p>
-            </div>
+      <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
+        <div className="max-w-2xl">
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            Meet our leadership
+          </h2>
+          <p className="mt-6 text-lg leading-8 text-gray-600">
+            Libero fames augue nisl porttitor nisi, quis. Id ac elit odio vitae
+            elementum enim vitae ullamcorper suspendisse.
+          </p>
+        </div>
+        <ul
+          role="list"
+          className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
+        >
+          {people.map((person) => (
+            <li key={person.name}>
+              <div className="flex items-center gap-x-6">
+                <img
+                  className="h-24 w-24 rounded-full object-cover"
+                  src={person.imageUrl}
+                  alt=""
+                />
+
+                <div>
+                  <h3 className="text-lg font-semibold leading-7 text-gray-900">
+                    {person.name}
+                  </h3>
+                  <p className="text-base font-semibold leading-6 text-gray-600">
+                    {person.role}
+                  </p>
+                </div>
               </div>
             </li>
           ))}
@@ -62,10 +60,21 @@ export default function About() {
         <div className="grid md:grid-cols-2">
           <div className="h-full pr-6">
             <p className="mt-20 mb-12 text-lg text-gray-800">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est
-              aperiam dolore facilis nulla dignissimos quasi accusamus,
-              temporibus recusandae, ab inventore quibusdam dolor beatae
-              corporis ea consectetur id ad nam velit!
+              At TeamSync, our mission is to simplify project management and
+              collaboration for teams of all sizes. We understand the challenges
+              teams face when working on projects – from coordinating tasks to
+              staying organized and meeting deadlines. TeamSync was created to
+              address these challenges by providing a centralized platform where
+              teams can efficiently manage projects, communicate effectively,
+              and track progress in real-time. Our goal is to empower teams to
+              work more productively, streamline workflows, and ultimately
+              achieve success with their projects. With intuitive features
+              designed to enhance team collaboration, streamline project
+              planning, and facilitate seamless communication, TeamSync is your
+              go-to solution for efficient project management. Join us on this
+              journey as we strive to make project management easier and more
+              enjoyable for teams around the world. Happy collaborating!
+              TeamSync
             </p>
             <ul className="mb-6 md:mb-0">
               <li className="flex">

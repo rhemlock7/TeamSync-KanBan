@@ -87,7 +87,7 @@ export default function ProfileSetting() {
             <div className="grid max-w-2xl mx-auto mt-8">
               <div className="flex flex-col items-center space-y-5 sm:flex-row sm:space-y-0">
                 <img
-                  className="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500"
+                  className="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-teal-800 dark:ring-blue-900"
                   src={data.user.img}
                   alt="Bordered avatar"
                 />
@@ -95,7 +95,7 @@ export default function ProfileSetting() {
                 <div className="flex flex-col space-y-5 sm:ml-8">
                   <button
                     type="button"
-                    className="py-3.5 px-7 text-base font-medium text-indigo-100 focus:outline-none bg-[#202142] rounded-lg border border-indigo-200 hover:bg-indigo-900 focus:z-10 focus:ring-4 focus:ring-indigo-200 "
+                    className="py-3.5 px-7 text-base font-medium text-indigo-100 focus:outline-none gradient-background rounded-lg border border-gray-200 hover:bg-indigo-900 focus:z-10 focus:ring-4 focus:ring-indigo-200 "
                     onClick={handleChange}
                   >
                     {change ? "Close form" : "Change picture"}
@@ -116,7 +116,7 @@ export default function ProfileSetting() {
                       />
                       <button
                         type="submit"
-                        className="text-white bg-indigo-700  hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
+                        className="text-white gradient-background hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
                         onClick={handleFormSubmit}
                       >
                         Save
@@ -202,7 +202,7 @@ export default function ProfileSetting() {
                 <div className="flex justify-end">
                   <button
                     type="submit"
-                    className="text-white bg-indigo-700  hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
+                    className="text-white gradient-background  hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
                     onClick={handleFormSubmit}
                   >
                     Save

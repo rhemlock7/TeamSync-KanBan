@@ -1,34 +1,34 @@
-import {useQuery} from "@apollo/client";
-import {useState} from "react";
+import { useQuery } from "@apollo/client";
+import { useState } from "react";
 import ProjectContainer from "../components/ProjectContainer";
 import ProjectSideNav from "../components/ProjectSideNav";
-import {Drawer} from "antd";
+import { Drawer } from "antd";
 import Auth from "../utils/auth";
 
-import {GET_USER} from "../utils/queries";
+import { GET_USER } from "../utils/queries";
 
 function Home() {
-  const [openDrawer, setOpenDrawer] = useState(false);
-  const [activeProject, setActiveProject] = useState("");
+    const [openDrawer, setOpenDrawer] = useState(false);
+    const [activeProject, setActiveProject] = useState("");
 
-  const showDrawer = () => {
-    setOpenDrawer(true);
-  };
+    const showDrawer = () => {
+        setOpenDrawer(true);
+    };
 
-  const onClose = () => {
-    setOpenDrawer(false);
-  };
+    const onClose = () => {
+        setOpenDrawer(false);
+    };
 
-  const {loading, data} = useQuery(GET_USER, {
-    variables: {userId: Auth.getProfile().authenticatedPerson._id},
-  });
+    const { loading, data } = useQuery(GET_USER, {
+        variables: { userId: Auth.getProfile().authenticatedPerson._id },
+    });
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-  function setProject(id) {
-    setActiveProject(id);
-  }
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+    function setProject(id) {
+        setActiveProject(id);
+    }
 
   if (data.user.projects.length < 1) {
     return (
