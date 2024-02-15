@@ -1,7 +1,8 @@
 # TeamSync KanBan Project Manager
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3037f882-5b56-4699-93fd-6ccdcb7a394c/deploy-status)](https://app.netlify.com/sites/teamsync-client-project-3/deploys)
 ## Deployed Link
-link
+https://teamsync-client-project-3.netlify.app/
 
 ## About This Project
 TeamSync is a task manager designed to help developers organize and manage their tasks effectively using the Kanban methodology. The Kanban Board provides a visual representation of tasks categorized into columns such as "To Do," "In Progress," and "Done," allowing developers to track the progress of their tasks easily.
