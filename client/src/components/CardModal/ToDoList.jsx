@@ -10,8 +10,6 @@ import {
 import {GET_SINGLE_CARD, QUERY_ONE_PROJECT} from "../../utils/queries";
 
 function ToDoList({todosDB, cardId}) {
-  // State
-  //   console.log(todosDB);
   const [todos, setTodos] = useState([]);
   const [editingIndex, setEditingIndex] = useState(null);
   const [editText, setEditText] = useState("");
@@ -25,18 +23,18 @@ function ToDoList({todosDB, cardId}) {
     refetchQueries: [GET_SINGLE_CARD, "card"],
   });
   useEffect(() => {
-    // console.log(todos);
     setTodos(todosDB.toDoes);
   }, []);
-  //   console.log(todos);
 
   // Helper functions
   function addTodo() {
-    const newArr = [...todos, {text: "", isCompleted: false}];
-    setTodos(newArr);
-    // TODO: Work on pushing the entire array back up to the DB.
-    AddToDo({variables: {cardId, text: ""}});
-    setEditingIndex(newArr.length - 1);
+    AddToDo({
+      variables: {cardId, text: " "},
+      onCompleted: (data) => {
+        setEditingIndex(todos.length);
+        setTodos(data.addToDo.toDoes);
+      },
+    });
   }
 
   function deleteTodo(index) {
@@ -59,16 +57,19 @@ function ToDoList({todosDB, cardId}) {
         isCompleted: isCom,
         cardId: cardId,
       },
-      refetchQueries: [GET_SINGLE_CARD, "card"],
+      onCompleted: (data) => {
+        // console.log(data);
+        setTodos(data.updateToDo.toDoes);
+      },
     });
-    const newArr = todos.toSpliced(index, 1);
-    const newTo = {
-      _id: todo._id,
-      text: todo.text,
-      isCompleted: isCom,
-    };
-    newArr.push(newTo);
-    setTodos(newArr);
+    // const newArr = todos.toSpliced(index, 1);
+    // const newTo = {
+    //   _id: todo._id,
+    //   text: todo.text,
+    //   isCompleted: isCom,
+    // };
+    // newArr.push(newTo);
+    // setTodos(newArr);
   }
 
   function editTodo(index) {
@@ -85,24 +86,26 @@ function ToDoList({todosDB, cardId}) {
   function saveEditedTodo(index) {
     const newTodos = [...todos];
     const todo = newTodos[index];
-    console.log(todo);
     updateToDo({
       variables: {
         toDoId: todo._id,
         text: editText,
         cardId: cardId,
-        isCompleted: todo.isCompleted,
+        isCompleted: false,
+      },
+      onCompleted: (data) => {
+        console.log(data);
+        setTodos(data.updateToDo.toDoes);
       },
     });
-    const newArr = todos.toSpliced(index, 1);
-    const newTo = {
-      _id: todo._id,
-      text: editText,
-      isCompleted: todo.isCompleted,
-    };
-    newArr.push(newTo);
-    setTodos(newArr);
-
+    // const newArr = todos.toSpliced(index, 1);
+    // const newTo = {
+    //   _id: todo._id,
+    //   text: editText,
+    //   isCompleted: todo.isCompleted,
+    // };
+    // newArr.push(newTo);
+    // setTodos(newArr);
     setEditingIndex(null);
     setEditText("");
   }
