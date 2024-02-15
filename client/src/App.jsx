@@ -6,7 +6,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { Outlet } from 'react-router-dom';
-import NavBar from './components/navbar';
+import NavBar from './components/NavBar.jsx';
 
 
 // Construct our main GraphQL API endpoint

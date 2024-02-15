@@ -1,11 +1,11 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Auth from "../utils/auth";
-function Navbar({isAuthenticated, profileId, imgSrc}) {
+function Navbar({ isAuthenticated, profileId, imgSrc }) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   return (
     <nav className=" w-full py-3  border-b border-gray-900  inset-0 navbar opacity-100">
-        
+
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -23,7 +23,7 @@ function Navbar({isAuthenticated, profileId, imgSrc}) {
           </div>
           <div className="flex flex-1 items-center justify-between ">
             <Link to="/" className="flex flex-shrink-0 items-center">
-            <img src="src/assets/logo.png" className="h-10 w-auto" alt="Logo" />  </Link>
+              <img src="src/assets/logo.png" className="h-10 w-auto" alt="Logo" />  </Link>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
                 <Link
@@ -45,7 +45,7 @@ function Navbar({isAuthenticated, profileId, imgSrc}) {
                     to={`/Home`}
                     className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-xl font-medium"
                   >
-                   Dashboard
+                    Dashboard
                   </Link>
                 )}
                 {/* Conditional rendering based on authentication status */}
