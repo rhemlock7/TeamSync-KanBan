@@ -30,79 +30,64 @@ function Home() {
         setActiveProject(id);
     }
 
-    if (data.user.projects.length < 1) {
-        return (
-            <div className="">
-                <div className="darkGray-bg text-white">
-                    <Drawer
-                        title="Projects"
-                        placement="left"
-                        closeable="false"
-                        onClose={onClose}
-                        open={openDrawer}
-                    >
-                        <ProjectSideNav projects={data.user} setProject={setProject} />
-                    </Drawer>
-                </div>
-                <div className="">
-                    <div className="gradient-bg px-5 h-screen">
-                        <button
-                            onClick={showDrawer}
-                            className="button-cta border-none text-white drop-shadow-xl ml-2 mt-2"
-                        >
-                            Projects
-                        </button>
-                        <div className="text-black ml-1">
-                            <h1>No projects yet...</h1>
-                            <p className="text-xl">Click the Projects button to create your first project.</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        );
-    }
-
-    // console.log(Auth.getProfile().authenticatedPerson);
+  if (data.user.projects.length < 1) {
     return (
-        <div className="">
-            <div className="darkGray-bg text-white">
-                <Drawer
-                    title="Projects"
-                    placement="left"
-                    closeable="false"
-                    onClose={onClose}
-                    open={openDrawer}
-                >
-                    <ProjectSideNav projects={data.user} setProject={setProject} />
-                </Drawer>
-            </div>
-            <div className="">
-                <div className="gradient-bg px-5 h-screen">
-                    <button
-                        onClick={showDrawer}
-                        className="button-cta border-none text-white drop-shadow-xl ml-2 mt-2"
-                    >
-                        Projects
-                    </button>
-                    {activeProject ? (
-                        <ProjectContainer
-                            projectId={
-                                activeProject
-                            }
-                        />
-                    ) : (
-                        <ProjectContainer
-
-                            projectId={
-                                data.user.projects[0]._id
-                            }
-                        />
-                    )}
-                </div>
-            </div>
+      <div className="">
+        <div className="darkGray-bg text-white">
+          <Drawer
+            title="Projects"
+            placement="left"
+            closeable="false"
+            onClose={onClose}
+            open={openDrawer}
+          >
+            <ProjectSideNav projects={data.user} setProject={setProject} />
+          </Drawer>
         </div>
+        <div className="">
+          <div className="gradient-bg px-5 h-screen">
+            <button
+              onClick={showDrawer}
+              className="button-cta border-none text-white drop-shadow-xl"
+            >
+              Projects
+            </button>
+          </div>
+        </div>
+      </div>
     );
+  }
+
+  return (
+    <div className="">
+      <div className="darkGray-bg text-white">
+        <Drawer
+          title="Projects"
+          placement="left"
+          closeable="false"
+          onClose={onClose}
+          open={openDrawer}
+        >
+          <ProjectSideNav projects={data.user} setProject={setProject} />
+        </Drawer>
+      </div>
+      <div className="">
+        <div className="gradient-bg px-5 h-screen">
+          <button
+            onClick={showDrawer}
+            className="button-cta border-none text-white drop-shadow-xl"
+          >
+            Projects
+          </button>
+          {activeProject ? (
+            <ProjectContainer projectId={activeProject} />
+          ) : (
+            <ProjectContainer projectId={data.user.projects[0]._id} />
+          )}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Home;
