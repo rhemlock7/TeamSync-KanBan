@@ -4,16 +4,12 @@ import {useState} from "react";
 import {ADD_LIST} from "../utils/mutations";
 import List from "./List";
 import DropDown from "./Dropdown";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-// import Profile from "./Profile";
 import {QUERY_ONE_PROJECT} from "../utils/queries";
 function ProjectContainer({projectId}) {
   const [title, setTitle] = useState("");
   const [showInput, setShowInput] = useState(false);
-  // const [avata, setAvata] = useState();
 
-  // console.log(projectId);
   const [AddList] = useMutation(ADD_LIST, {
     variables: {title: title, projectId: projectId},
     refetchQueries: [QUERY_ONE_PROJECT, "projectId"],
@@ -24,9 +20,7 @@ function ProjectContainer({projectId}) {
   if (loading) {
     return <div>loading</div>;
   }
-  // console.log(data);
   const users = data.projectId.users;
-  // console.log('Users', users)
   const lists = data.projectId?.lists || [];
 
   function handleShowInput() {
@@ -47,7 +41,7 @@ function ProjectContainer({projectId}) {
   return (
     <div className="pb-6 md:pb-0 mb-0">
       <div className="flex flex-col">
-        <h1>{data.projectId.title}</h1>
+        <h1 className="my-5">{data.projectId.title}</h1>
         <div className="flex justify-start items-center mb-5">
           {/* <button onClick={showDrawer} className='button-cta border-none text-white drop-shadow-xl'>Projects</button> */}
           <DropDown projectId={projectId} />
@@ -56,7 +50,6 @@ function ProjectContainer({projectId}) {
               maxCount={2}
               maxStyle={{color: "#f56a00", backgroundColor: "#fde3cf"}}
             >
-              {/* <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=2" /> */}
               {users.map((user) => (
                 <Avatar key={user._id} style={{backgroundColor: "#f56a00"}}>
                   {user.username.charAt(0).toUpperCase()}
