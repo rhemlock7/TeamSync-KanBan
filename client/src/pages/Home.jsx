@@ -59,7 +59,7 @@ function Home() {
   }
 
   return (
-    <div className="">
+    <div className="md:px-10 gradient-bg h-screen">
       <div className="darkGray-bg text-white">
         <Drawer
           title="Projects"
@@ -72,10 +72,10 @@ function Home() {
         </Drawer>
       </div>
       <div className="">
-        <div className="gradient-bg px-5 h-screen">
+        <div className="px-5">
           <button
             onClick={showDrawer}
-            className="button-cta border-none text-white drop-shadow-xl"
+            className="button-cta border-none text-white drop-shadow-xl mt-5"
           >
             Projects
           </button>
