@@ -4,6 +4,8 @@ import {useState} from "react";
 import {ADD_LIST} from "../utils/mutations";
 import List from "./List";
 import DropDown from "./Dropdown";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+
 // import Profile from "./Profile";
 import {QUERY_ONE_PROJECT} from "../utils/queries";
 function ProjectContainer({projectId}) {
